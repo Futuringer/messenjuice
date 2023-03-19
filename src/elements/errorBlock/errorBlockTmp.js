@@ -1,9 +1,12 @@
+module.exports= errorBlockTmp = `
 <div class="error__container">
   <h1 class="error__title">
-    {{this.errorTitle}}
+    {{errorTitle}}
   </h1>
   <p class="error__text">
-    {{this.errorText}}
+    {{errorText}}
   </p>
-  {{>button/button this.button}}
+  {{>button button}}
 </div>
+`;
+

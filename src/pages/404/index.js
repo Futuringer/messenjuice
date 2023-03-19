@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
-import clientErrorPage from "bundle-text:./404.hbs";
+import { clientErrorTmp } from "./404Tmp";
 
 export const renderClientError = () => {
-  return Handlebars.compile(clientErrorPage)();
+  return Handlebars.compile(clientErrorTmp)({errorTitle:'404', errorText:'Page not found', button: {type: "button", text: 'Back to chat', isActive: true}});
 };

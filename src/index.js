@@ -1,3 +1,4 @@
+import Handlebars from "handlebars";
 import {
   renderLogin,
   renderProfile,
@@ -6,6 +7,16 @@ import {
   renderServerError,
   renderChat,
 } from "./pages";
+import  errorBlockTmp  from "./elements/errorBlock/errorBlockTmp";
+import buttonTmp from "./elements/button/buttonTmp";
+import formTmp from "./elements/form/formTmp";
+import inputTmp from "./elements/input/inputTmp";
+
+console.log(errorBlockTmp, buttonTmp)
+Handlebars.registerPartial('errorBlock', errorBlockTmp);
+Handlebars.registerPartial('button', buttonTmp);
+Handlebars.registerPartial('input', inputTmp);
+Handlebars.registerPartial('form', formTmp);
 
 const container = document.getElementById("root");
 const path = window.location.pathname;

@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
-import serverErrorPage from "bundle-text:./500.hbs";
+import { serverErrorTmp } from "./500Tmp";
 
 export const renderServerError = () => {
-  return Handlebars.compile(serverErrorPage)();
+  return Handlebars.compile(serverErrorTmp)({errorTitle:'500', errorText:'Server error', button: {type: "button", text: 'Back to chat', isActive: true}});
 };
