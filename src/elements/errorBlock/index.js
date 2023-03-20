@@ -1,9 +1,9 @@
-const Handlebars = require('handlebars');
+import { compile } from 'handlebars';
 
-const  { errorBlockTmp } = require("./errorBlockTmp");
+import { errorBlockTmp } from "./errorBlockTmp";
 
 const errorBlock = ()=>{
-  return Handlebars.compile(errorBlockTmp)()
+  return compile(errorBlockTmp)()
 }
 
-module.exports = {errorBlock}
+export default {errorBlock}

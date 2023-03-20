@@ -1,11 +1,9 @@
-const Handlebars = require('handlebars');
+import { compile } from 'handlebars';
 
-const { formTmp } = require("./formTmp");
-
-console.log('formTmp',formTmp)
+import { formTmp } from "./formTmp";
 
 const form = ()=>{
-  return Handlebars.compile(formTmp)()
+  return compile(formTmp)()
 }
 
-module.exports = {form}
+export default {form}

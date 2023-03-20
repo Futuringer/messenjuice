@@ -1,11 +1,11 @@
-const Handlebars = require('handlebars');
+import { compile } from 'handlebars';
 
-const { inputTmp } = require("./inputTmp").default;
+import { inputTmp } from "./inputTmp";
 
 console.log('formTmp',formTmp)
 
 const input = ()=>{
-  return Handlebars.compile(inputTmp)()
+  return compile(inputTmp)()
 }
 
-module.exports = {input}
+export default {input}
