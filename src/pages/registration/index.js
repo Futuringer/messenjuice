@@ -7,7 +7,7 @@ const data = {
   formText: 'Sign up',
   descriptionText: 'Already have an account?',
   descriptionLinkText: 'Log in',
-  descriptionLink: '/sign-up',
+  descriptionLink: '/sign-in',
   singleColumn: true,
   img:logo,
   inputs: [
