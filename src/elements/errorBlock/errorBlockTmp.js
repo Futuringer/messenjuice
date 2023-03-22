@@ -1,4 +1,4 @@
-module.exports= errorBlockTmp = `
+const errorBlockTmp = `
 <div class="error__container">
   <h1 class="error__title">
     {{errorTitle}}
@@ -10,3 +10,4 @@ module.exports= errorBlockTmp = `
 </div>
 `;
 
+export default errorBlockTmp;

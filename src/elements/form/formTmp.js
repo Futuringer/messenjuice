@@ -1,4 +1,4 @@
-module.exports= formTmp = `
+const formTmp = `
 <form class="form" name="{{formName}}">
   <h1 class="form__header">{{formText}}</h1>
 
@@ -16,7 +16,7 @@ module.exports= formTmp = `
     {{/each}}
   </div>
   {{/if}}
-  
+
   <div class="form__buttons-container">
     {{#each buttons}}
       {{>button}}
@@ -32,3 +32,4 @@ module.exports= formTmp = `
 </form>
 `;
 
+export default formTmp;

@@ -1,4 +1,4 @@
-module.exports = formTmp = `
+const formTmp = `
 <div class="input">
   <label class="input__label">{{label}}</label>
   <input
@@ -11,3 +11,4 @@ module.exports = formTmp = `
 </div>
 `;
 
+export default formTmp;

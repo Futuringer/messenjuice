@@ -1,4 +1,4 @@
-export const loginTmp = `
+const loginTmp = `
 <main class="splitScreen__main">
   <div class="splitScreen__logoPart">
     <div class="splitScreen__logo">
@@ -18,3 +18,5 @@ export const loginTmp = `
   </div>
 </main>
 `;
+
+export default loginTmp;

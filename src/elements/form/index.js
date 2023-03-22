@@ -1,9 +1,9 @@
 import { compile } from 'handlebars';
 
-import { formTmp } from "./formTmp";
+import formTmp from './formTmp';
 
-const form = ()=>{
-  return compile(formTmp)()
-}
+const form = () => {
+  return compile(formTmp)();
+};
 
-export default {form}
+export default { form };

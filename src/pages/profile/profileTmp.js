@@ -1,4 +1,4 @@
-export const profileTmp = `
+const profileTmp = `
 <main class="profile__main">
   <div class="profile__formPart">
     <div class="profile__form-container">
@@ -14,3 +14,5 @@ export const profileTmp = `
   </div>
 </main>
 `;
+
+export default profileTmp;

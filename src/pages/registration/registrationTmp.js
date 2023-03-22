@@ -1,4 +1,4 @@
-export const registrationTmp = `
+const registrationTmp = `
 <main class="splitScreen__main">
   <div class="splitScreen__logoPart">
     <div class="splitScreen__logo">
@@ -18,3 +18,5 @@ export const registrationTmp = `
   </div>
 </main>
 `;
+
+export default registrationTmp;

@@ -1,8 +1,8 @@
-@use "variables/colors" as v;
-@use "./normalize.scss";
+@use 'variables/colors' as v;
+@use './normalize.scss';
 
 body {
-  font-family: "Manrope", sans-serif;
+  font-family: 'Manrope', sans-serif;
   height: 100vh;
 }
 

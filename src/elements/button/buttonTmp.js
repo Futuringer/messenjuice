@@ -1,4 +1,4 @@
-export default buttonTmp = `
+const buttonTmp = `
 {{#if isActive}}
   <button class="button button_active" type={{type}}>
     {{text}}
@@ -10,3 +10,4 @@ export default buttonTmp = `
 {{/if}}
 `;
 
+export default buttonTmp;
