@@ -1,24 +1,29 @@
 {
   "plugins": [
-    //"prettier"
-    //"unicorn"
+    "@typescript-eslint"
   ],
   "extends": [
     "airbnb-base",
-    //"plugin:unicorn/recommended",
-    //"plugin:prettier/recommended",
-    //"prettier"
-    //"prettier/unicorn"
-    "plugin:prettier/recommended"
+    "airbnb-typescript/base",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "env": {
     "es6": true,
     "browser": true
   },
-  // "rules": {
-  //     "unicorn/prevent-abbreviations": "off"
-  // },
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "indent": [
       "error",
       2,
@@ -35,6 +40,9 @@
     "no-use-before-define": "error"
   },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": [
+      "tsconfig.json"
+    ]
   }
 }

@@ -3,4 +3,5 @@
 .parcel-cache
 .vscode
 .env
+.stylelintcache
 /myStash
