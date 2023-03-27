@@ -1,0 +1,15 @@
+@use './../../styles/variables/colors.scss' as v;
+
+.chat {
+  &__main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  &__contactsPart {
+    padding: 15px;
+    width: 340px;
+    background-color: v.$baseLight;
+  }
+}

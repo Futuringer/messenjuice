@@ -1,26 +1,20 @@
 const formTmp = `
-<form class="form" name="{{formName}}">
+<form class="form" id="{{formName}}" onsubmit={{onSubmit}}>
   <h1 class="form__header">{{formText}}</h1>
 
   {{#if singleColumn}}
   <div class="form__inputs-container">
-    {{#each inputs}}
-      {{>input}}
-    {{/each}}
+      {{{inputs}}}
   </div>
 
   {{else}}
     <div class="form__inputs-container form__inputs-container_two-columns">
-    {{#each inputs}}
-      {{>input}}
-    {{/each}}
+      {{{inputs}}}
   </div>
   {{/if}}
 
   <div class="form__buttons-container">
-    {{#each buttons}}
-      {{>button}}
-    {{/each}}
+      {{{buttons}}}
   </div>
 
   {{#if descriptionText}}

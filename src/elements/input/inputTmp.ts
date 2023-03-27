@@ -1,14 +1,13 @@
-const formTmp = `
-<div class="input">
-  <label class="input__label">{{label}}</label>
+const inputTmp = `
   <input
     class="input__field"
-    required={{isRequired}}
-    name="{{name}}"
+    {{#if isRequired}}
+    required=true
+    {{/if}}
+    name={{name}}
     type={{type}}
     placeholder="{{placeholder}}"
   />
-</div>
 `;
 
-export default formTmp;
+export default inputTmp;

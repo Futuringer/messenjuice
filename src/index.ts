@@ -1,12 +1,7 @@
 import Handlebars from 'handlebars';
-import {
-  renderLogin,
-  renderProfile,
-  renderRegistration,
-  renderClientError,
-  renderServerError,
-  //  renderChat,
-} from './pages';
+import LoginPage from './pages/login';
+import ChatPage from './pages/chat';
+import { renderProfile, renderRegistration, renderClientError, renderServerError } from './pages';
 import errorBlockTmp from './elements/errorBlock/errorBlockTmp';
 import buttonTmp from './elements/button/buttonTmp';
 import formTmp from './elements/form/formTmp';
@@ -26,7 +21,7 @@ if (container) {
       window.location.href = '/sign-in';
       break;
     case '/sign-in':
-      container.innerHTML = renderLogin();
+      container.append(LoginPage.getContent()!);
       break;
     case '/sign-up':
       container.innerHTML = renderRegistration();
@@ -37,9 +32,9 @@ if (container) {
     case '/500':
       container.innerHTML = renderServerError();
       break;
-    // case '/chat':
-    //   container.innerHTML = renderChat();
-    //   break;
+    case '/chat':
+      container.append(ChatPage.getContent()!);
+      break;
     default:
       container.innerHTML = renderClientError();
       break;

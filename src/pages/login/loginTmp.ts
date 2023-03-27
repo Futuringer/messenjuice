@@ -13,7 +13,7 @@ const loginTmp = `
 
   <div class="splitScreen__contentPart">
     <div class="login-form-container">
-    {{>form}}
+    {{{form}}}
     </div>
   </div>
 </main>
