@@ -1,0 +1,9 @@
+@use './../../styles/variables/colors.scss' as v;
+
+.chatInput {
+  background-color: v.$baseNeutral;
+  color: v.$neutralDark;
+  border: none;
+  text-align: center;
+  margin-bottom: 10px;
+}

@@ -1,6 +1,6 @@
 const inputTmp = `
   <input
-    class="input__field"
+    class="input__field {{className}}"
     {{#if isRequired}}
     required=true
     {{/if}}

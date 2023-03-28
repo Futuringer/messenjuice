@@ -1,0 +1,9 @@
+@use './../../styles/variables/colors.scss' as v;
+
+.messageInput {
+  background-color: v.$baseNeutral;
+  color: v.$neutralDark;
+  border: none;
+  width: 100%;
+  text-align: left;
+}

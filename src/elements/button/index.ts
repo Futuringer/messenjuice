@@ -1,12 +1,40 @@
 import Block from '../../utils/block';
 import buttonTmp from './buttonTmp';
 
-export type ButtonProps = {
-  text: string;
+type DefaultButtonProps = {
+  variant: 'form';
   type: 'submit' | 'button';
+  text: string;
   isActive?: boolean;
-  events?: any;
+  events?: {
+    click: () => void;
+  };
+  className?: string;
+  disabled?: boolean;
 };
+
+type CircleButtonProps = {
+  variant: 'circle';
+  type: 'submit' | 'button';
+  icon: string;
+  events?: {
+    click: () => void;
+  };
+  className?: string;
+  disabled?: boolean;
+};
+
+type ButtonProps = DefaultButtonProps | CircleButtonProps;
+
+// export type ButtonProps = {
+//   variant?: 'default' | 'circle';
+//   text: string;
+//   type: 'submit' | 'button';
+//   isActive?: boolean;
+//   events?: {
+//     click: () => void;
+//   };
+// };
 
 // const button = () => {
 //   return compile(buttonTmp)({});
@@ -21,6 +49,7 @@ class Button extends Block<ButtonProps> {
   // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(buttonTmp, this.props);
+    console.log('BUTTONPROPS', this.props);
     // return document.createRange().createContextualFragment(str);
     return str;
   }

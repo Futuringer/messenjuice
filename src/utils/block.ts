@@ -60,7 +60,7 @@ class Block<P extends Record<string, any> = any> {
     const { events = {} } = this.props as P & { events: Record<string, () => void> };
 
     Object.keys(events).forEach(eventName => {
-      console.log(eventName, this._element);
+      // console.log(eventName, this._element);
       this._element?.addEventListener(eventName, events[eventName], false);
       // this._element?.addEventListener('click', () => console.log(12));
     });
@@ -104,9 +104,11 @@ class Block<P extends Record<string, any> = any> {
 
   _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
+    console.log('response', response);
     if (!response) {
       return;
     }
+    console.log('this.props', this.props);
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
@@ -114,12 +116,13 @@ class Block<P extends Record<string, any> = any> {
     return oldProps !== newProps;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }
-
-    Object.assign(this.props, nextProps);
+    const newProps = { ...this.props, ...nextProps };
+    // console.log(1, this.props, 2, nextProps, 3, newProps);
+    Object.assign(this.props, newProps);
   };
 
   get element() {
@@ -131,6 +134,8 @@ class Block<P extends Record<string, any> = any> {
     const newElement = block.firstElementChild as HTMLElement;
 
     if (this._element) {
+      console.log('here', newElement);
+      this._element!.replaceWith(newElement);
       this._element = newElement;
     }
 
@@ -147,30 +152,22 @@ class Block<P extends Record<string, any> = any> {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]) => {
-      // console.log('child', child);
-
       if (Array.isArray(child)) {
         propsAndStubs[key] = child.map(child => `<div data-id="${child.id}"></div>`);
+        propsAndStubs[key] = propsAndStubs[key].join('');
       } else {
         propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
       }
     });
 
-    // console.log('propsAndStubs', propsAndStubs);
-
     const tmp = Handlebars.compile(template);
-    // console.log('tmp', template);
     const html = tmp(propsAndStubs);
-    // console.log('html', html);
     const temp = document.createElement('template');
-
-    const filteredHtml = html.replace(',', '');
-    temp.innerHTML = filteredHtml;
-
-    // console.log('TEMP', temp.innerHTML);
+    temp.innerHTML = html;
 
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
+        console.log('component', component);
         component.forEach(item => {
           const stub = temp.content.querySelector(`[data-id="${item.id}"]`);
           item.getContent()?.append(...Array.from(stub.childNodes));
@@ -186,7 +183,7 @@ class Block<P extends Record<string, any> = any> {
       // }
     });
 
-    // console.log('temp', temp.content);
+    console.log(' temp.content', temp.content);
     // console.log('html', html);
     return temp.content;
     // return html;

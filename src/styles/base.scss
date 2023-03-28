@@ -1,6 +1,10 @@
 @use 'variables/colors' as v;
 @use './normalize.scss';
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Manrope', sans-serif;
   height: 100vh;
@@ -14,8 +18,4 @@ body {
 
 .full-height {
   height: 100%;
-}
-
-.errorLabel {
-  color: red;
 }

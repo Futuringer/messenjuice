@@ -11,7 +11,6 @@ Handlebars.registerPartial('errorBlock', errorBlockTmp);
 Handlebars.registerPartial('button', buttonTmp);
 Handlebars.registerPartial('input', inputTmp);
 Handlebars.registerPartial('form', formTmp);
-
 const container = document.getElementById('root');
 const path = window.location.pathname;
 

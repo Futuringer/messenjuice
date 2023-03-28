@@ -1,11 +1,8 @@
 import Block from '../../utils/block';
 import inputTmp from './inputTmp';
 
-// const input = () => {
-//   return compile(inputTmp)({});
-// };
-
 export type InputProps = {
+  className?: string;
   name: string;
   type: 'text' | 'number' | 'password' | 'email';
   isRequired?: boolean;
@@ -14,6 +11,7 @@ export type InputProps = {
     blur?: (value: HTMLInputElement) => void;
     focus?: (value: HTMLInputElement) => void;
     invalid?: (value: HTMLInputElement) => void;
+    input?: (value: Event) => void;
   };
 };
 

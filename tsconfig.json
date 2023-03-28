@@ -22,10 +22,6 @@
       "*": [
         "*",
         "src/*",
-        "src/setup/*",
-        "src/logic/*",
-        "src/models/*",
-        "config/*"
       ]
     },
   },

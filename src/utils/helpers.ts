@@ -19,6 +19,8 @@ export const validateFormInput = (validationParams: { name: string; regex: RegEx
     label.textContent = errorText;
     label.classList.add('errorLabel');
   }
+
+  return result;
 };
 
 export const setDefaultLabelState = (name: string) => {
