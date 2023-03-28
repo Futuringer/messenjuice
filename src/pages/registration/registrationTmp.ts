@@ -13,7 +13,7 @@ const registrationTmp = `
 
   <div class="splitScreen__contentPart">
   <div class="registration-form-container">
-  {{>form}}
+    {{{form}}}
   </div>
   </div>
 </main>

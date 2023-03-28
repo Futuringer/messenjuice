@@ -1,35 +1,76 @@
-import Handlebars from 'handlebars';
+import { validateFormInput, setDefaultLabelState, handleInvalid, handleSubmitForm } from '../../utils/helpers';
+import { validationFormsConfig, profileInputsConfig } from '../../utils/consts';
+import InputWithLabel from '../../elements/inputWithLabel';
+import Form from '../../elements/form';
+import Input from '../../elements/input';
+import Button from '../../elements/button';
 import profileTmp from './profileTmp';
 import logo from '../../../static/imgs/avatarPlaceholder.png';
+import Block from '../../utils/block';
 
-const data = {
-  formName: 'profileForm',
+type ProfilePageProps = {
+  name: string;
+  img: string;
+  form: Form;
+};
+
+const changeInfoButton = new Button({
+  variant: 'form',
+  text: 'Change Info',
+  type: 'submit',
+  isActive: true,
+});
+
+const cancelButton = new Button({
+  variant: 'form',
+  text: 'Cancel',
+  type: 'button',
+  isActive: false,
+});
+
+const inputsWithLlabel = profileInputsConfig.map(item => {
+  // eslint-disable-next-line no-new
+  return new InputWithLabel({
+    label: item.label,
+    input: new Input({
+      ...item,
+      events: {
+        blur: () => validateFormInput(validationFormsConfig[item.name as keyof typeof validationFormsConfig]!),
+        focus: () => setDefaultLabelState(item.name),
+        invalid: () => handleInvalid(item.name),
+      },
+    }),
+  });
+});
+
+const profileForm2 = new Form({
+  formName: 'profileForm2',
   formText: 'Profile',
   singleColumn: false,
-  img: logo,
-  inputs: [
-    { label: 'Email Address', name: 'email', type: 'text', placeholder: 'Enter your Email', isRequired: true },
-    { label: 'Login', name: 'login', type: 'text', placeholder: 'Enter your login', isRequired: true },
-    { label: 'First Name', name: 'first_name', type: 'text', placeholder: 'Enter your First Name', isRequired: true },
-    {
-      label: 'Second Name',
-      name: 'second_name',
-      type: 'text',
-      placeholder: 'Enter your Second Name',
-      isRequired: true,
+  buttons: [changeInfoButton, cancelButton],
+  inputs: [...inputsWithLlabel],
+  events: {
+    submit: e => {
+      handleSubmitForm(e, 'profileForm2');
     },
-    { label: 'Name to show', name: 'display_name', type: 'text', placeholder: 'Enter your Phone', isRequired: true },
-    { label: 'Phone', name: 'phone', type: 'tel', placeholder: 'Enter your Phone', isRequired: true },
-  ],
-  buttons: [
-    { type: 'button', text: 'Change Info', isActive: false },
-    { type: 'button', text: 'Change Password', isActive: false },
-    { type: 'submit', text: 'Cancel', isActive: true },
-  ],
-};
+  },
+});
+class ProfilePageComponent extends Block<ProfilePageProps> {
+  constructor(props: ProfilePageProps) {
+    super(props);
+  }
 
-const renderProfile = () => {
-  return Handlebars.compile(profileTmp)(data);
-};
+  // eslint-disable-next-line class-methods-use-this
+  render() {
+    const str = this.compile(profileTmp, this.props);
+    return str;
+  }
+}
 
-export default renderProfile;
+const ProfilePage = new ProfilePageComponent({
+  name: 'Vlad',
+  img: logo,
+  form: profileForm2,
+});
+
+export default ProfilePage;

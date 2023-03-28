@@ -1,9 +1,10 @@
+import { InputsCollectionType } from 'src/utils/consts';
 import Block from '../../utils/block';
 import inputTmp from './inputTmp';
 
 export type InputProps = {
   className?: string;
-  name: string;
+  name: InputsCollectionType;
   type: 'text' | 'number' | 'password' | 'email';
   isRequired?: boolean;
   placeholder: string;

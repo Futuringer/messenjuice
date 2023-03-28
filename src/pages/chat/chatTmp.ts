@@ -15,7 +15,9 @@ const chatTmp = `
       {{{userBadge}}}
     </div>
     <div class="contentPart__main">
-      MAIN
+      <div class="contentPart__messagesList">
+        {{{messages}}}
+      </div>
     </div>
     <div class="contentPart__bottom">
 

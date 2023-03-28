@@ -1,5 +1,11 @@
-import { validateFormInput, setDefaultLabelState, handleInvalid, gatherAllInputs } from '../../utils/helpers';
-import { validationFormsConfig } from '../../utils/consts';
+import {
+  validateFormInput,
+  setDefaultLabelState,
+  handleInvalid,
+  handleSubmitForm,
+  validateFormInput2,
+} from '../../utils/helpers';
+import { validationFormsConfig, loginInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';
 import Input from '../../elements/input';
@@ -7,21 +13,20 @@ import Button from '../../elements/button';
 import loginTmp from './loginTmp';
 import logo from '../../../static/imgs/logo.svg';
 import Block from '../../utils/block';
-import inputsConfig from './utils';
 
 type LoginPageProps = {
   img: string;
   form: Form;
 };
 
-const inputsWithLlabel = inputsConfig.map(item => {
+const inputsWithLlabel = loginInputsConfig.map(item => {
   // eslint-disable-next-line no-new
   return new InputWithLabel({
-    label: item.name,
+    label: item.label,
     input: new Input({
       ...item,
       events: {
-        blur: () => validateFormInput(validationFormsConfig[item.name as keyof typeof validationFormsConfig]),
+        blur: () => validateFormInput2(item.name),
         focus: () => setDefaultLabelState(item.name),
         invalid: () => handleInvalid(item.name),
       },
@@ -29,9 +34,9 @@ const inputsWithLlabel = inputsConfig.map(item => {
   });
 });
 
-const signUpButton = new Button({
+const signInButton = new Button({
   variant: 'form',
-  text: 'Sign up',
+  text: 'Sign in',
   type: 'submit',
   isActive: true,
 });
@@ -43,26 +48,10 @@ const loginForm = new Form({
   descriptionLinkText: 'Create one',
   descriptionLink: './sign-up',
   singleColumn: true,
-  buttons: [signUpButton],
+  buttons: [signInButton],
   inputs: [...inputsWithLlabel],
   events: {
-    submit: e => {
-      e.preventDefault();
-      const form = document.forms.namedItem('loginForm');
-      const inputs = gatherAllInputs(form!);
-      const results = inputs.map(input =>
-        validateFormInput(validationFormsConfig[input as keyof typeof validationFormsConfig]),
-      );
-      const noErrors = results.every(item => item);
-
-      if (noErrors) {
-        const data = new FormData(form!);
-        // eslint-disable-next-line no-restricted-syntax
-        for (const [name, value] of data) {
-          console.log(name, ':', value);
-        }
-      }
-    },
+    submit: e => handleSubmitForm(e, 'loginForm'),
   },
 });
 

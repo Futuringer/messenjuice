@@ -104,11 +104,9 @@ class Block<P extends Record<string, any> = any> {
 
   _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
-    console.log('response', response);
     if (!response) {
       return;
     }
-    console.log('this.props', this.props);
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
@@ -134,7 +132,6 @@ class Block<P extends Record<string, any> = any> {
     const newElement = block.firstElementChild as HTMLElement;
 
     if (this._element) {
-      console.log('here', newElement);
       this._element!.replaceWith(newElement);
       this._element = newElement;
     }
@@ -167,7 +164,6 @@ class Block<P extends Record<string, any> = any> {
 
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
-        console.log('component', component);
         component.forEach(item => {
           const stub = temp.content.querySelector(`[data-id="${item.id}"]`);
           item.getContent()?.append(...Array.from(stub.childNodes));
@@ -183,8 +179,6 @@ class Block<P extends Record<string, any> = any> {
       // }
     });
 
-    console.log(' temp.content', temp.content);
-    // console.log('html', html);
     return temp.content;
     // return html;
   }

@@ -2,7 +2,9 @@ const buttonTmp = `
 {{#if isActive}}
   <button class="button button_active_{{variant}} {{className}}" type={{type}}>
       {{text}}
-      <img class="button__icon" src={{icon}} alt=''>
+      {{#if icon}}
+        <img class="button__icon" src={{icon}} alt=''>
+      {{/if}}
   </button>
 {{else}}
   {{#if disabled}}
@@ -13,7 +15,9 @@ const buttonTmp = `
   {{else}}
     <button class="button button_{{variant}} {{className}}" type={{type}}>
       {{{text}}}
-      <img class="button__icon" src={{icon}} alt=''>
+      {{#if icon}}
+        <img class="button__icon" src={{icon}} alt=''>
+      {{/if}}
     </button>
   {{/if}}
 {{/if}}

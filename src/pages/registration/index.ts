@@ -1,38 +1,69 @@
-import Handlebars from 'handlebars';
+import { validateFormInput, setDefaultLabelState, handleInvalid, handleSubmitForm } from '../../utils/helpers';
+import { validationFormsConfig, registrationInputsConfig } from '../../utils/consts';
+import InputWithLabel from '../../elements/inputWithLabel';
+import Form from '../../elements/form';
+import Input from '../../elements/input';
+import Button from '../../elements/button';
 import registrationTmp from './registrationTmp';
 import logo from '../../../static/imgs/logo.svg';
+import Block from '../../utils/block';
 
-const data = {
-  formName: 'registrationForm',
-  formText: 'Sign up',
+type RegistrationPageProps = {
+  img: string;
+  form: Form;
+};
+
+const inputsWithLlabel = registrationInputsConfig.map(item => {
+  // eslint-disable-next-line no-new
+  return new InputWithLabel({
+    label: item.label,
+    input: new Input({
+      ...item,
+      events: {
+        blur: () => validateFormInput(validationFormsConfig[item.name as keyof typeof validationFormsConfig]!),
+        focus: () => setDefaultLabelState(item.name),
+        invalid: () => handleInvalid(item.name),
+      },
+    }),
+  });
+});
+
+const signUpButton = new Button({
+  variant: 'form',
+  text: 'Sign up',
+  type: 'submit',
+  isActive: true,
+});
+
+const registrationForm = new Form({
+  formName: 'loginForm',
+  formText: 'Sign in',
   descriptionText: 'Already have an account?',
   descriptionLinkText: 'Log in',
-  descriptionLink: '/sign-in',
+  descriptionLink: './sign-in',
   singleColumn: true,
+  buttons: [signUpButton],
+  inputs: [...inputsWithLlabel],
+  events: {
+    submit: e => handleSubmitForm(e, 'loginForm'),
+  },
+});
+
+class RegistrationPageComponent extends Block<RegistrationPageProps> {
+  constructor(props: RegistrationPageProps) {
+    super(props);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  render() {
+    const str = this.compile(registrationTmp, this.props);
+    return str;
+  }
+}
+
+const RegistrationPage = new RegistrationPageComponent({
   img: logo,
-  inputs: [
-    { label: 'Login', name: 'login', type: 'text', placeholder: 'Enter your login', isRequired: true },
-    { label: 'First Name', name: 'first_name', type: 'text', placeholder: 'Enter your First Name', isRequired: true },
-    {
-      label: 'Second Name',
-      name: 'second_name',
-      type: 'text',
-      placeholder: 'Enter your Second Name',
-      isRequired: true,
-    },
-    { label: 'Email Address', name: 'email', type: 'texy', placeholder: 'Enter your Email', isRequired: true },
-    { label: 'Phone', name: 'phone', type: 'phone', placeholder: 'Enter your Phone', isRequired: true },
-    { label: 'Password', name: 'password', type: 'password', placeholder: 'Enter your Password', isRequired: true },
-  ],
-  buttons: [
-    { type: 'button', text: 'Change Info', isActive: false },
-    { type: 'button', text: 'Change Password', isActive: false },
-    { type: 'submit', text: 'Cancel', isActive: true },
-  ],
-};
+  form: registrationForm,
+});
 
-const renderRegistration = () => {
-  return Handlebars.compile(registrationTmp)(data);
-};
-
-export default renderRegistration;
+export default RegistrationPage;

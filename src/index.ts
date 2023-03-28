@@ -1,7 +1,9 @@
 import Handlebars from 'handlebars';
+import RegistrationPage from './pages/registration';
 import LoginPage from './pages/login';
 import ChatPage from './pages/chat';
-import { renderProfile, renderRegistration, renderClientError, renderServerError } from './pages';
+import ProfilePage from './pages/profile';
+import { renderClientError, renderServerError } from './pages';
 import errorBlockTmp from './elements/errorBlock/errorBlockTmp';
 import buttonTmp from './elements/button/buttonTmp';
 import formTmp from './elements/form/formTmp';
@@ -23,10 +25,10 @@ if (container) {
       container.append(LoginPage.getContent()!);
       break;
     case '/sign-up':
-      container.innerHTML = renderRegistration();
+      container.append(RegistrationPage.getContent()!);
       break;
     case '/profile':
-      container.innerHTML = renderProfile();
+      container.append(ProfilePage.getContent()!);
       break;
     case '/500':
       container.innerHTML = renderServerError();

@@ -74,8 +74,9 @@
   }
 
   &__main {
-    font-size: 0;
-    line-height: 0;
+    overflow: hidden;
+    display: flex;
+    padding: 80px 10px 70px 65px;
     height: 100%;
   }
 
@@ -84,8 +85,16 @@
     height: min-content;
     width: 100%;
     display: flex;
-    gap: 14px;
     bottom: 0;
     position: absolute;
+  }
+
+  &__messagesList {
+    gap: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    padding-right: 65px;
+    scrollbar-gutter: stable;
   }
 }

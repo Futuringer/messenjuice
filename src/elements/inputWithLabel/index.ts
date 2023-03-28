@@ -5,13 +5,13 @@ import Input from '../input';
 //   return compile(inputTmp)({});
 // };
 
-type InputProps = {
+export type InputWithLabelProps = {
   label: string;
   input: Input;
 };
 
-class InputWithLabel extends Block<InputProps> {
-  constructor(props: InputProps) {
+class InputWithLabel extends Block<InputWithLabelProps> {
+  constructor(props: InputWithLabelProps) {
     super(props);
   }
 

@@ -1,12 +1,13 @@
 import { validateInput } from '../../utils/helpers';
 import { validationParams } from '../../utils/consts';
+import Message from '../../elements/message';
 import Button from '../../elements/button';
 import Input from '../../elements/input';
 import ContactCard from '../../elements/contactCard';
 import chatTmp from './chatTmp';
 import Block from '../../utils/block';
 import CardsBlock from '../../elements/cardsBlock';
-import mockCards from './utils';
+import { mockCards, mockMessages } from './utils';
 import UserBadge from '../../elements/userBadge';
 import logo from '../../../static/imgs/avatarPlaceholder.png';
 import arrow from '../../../static/imgs/icons/arrow.svg';
@@ -19,11 +20,16 @@ type ChatProps = {
   searchInput: Input;
   contacts: CardsBlock;
   messageForm: MessageForm;
+  messages: Message[];
 };
 
 const cards = mockCards.map(item => {
   // eslint-disable-next-line no-new
   return new ContactCard(item);
+});
+
+const messages = mockMessages.map(item => {
+  return new Message(item);
 });
 
 const cardsBlock = new CardsBlock({
@@ -36,7 +42,7 @@ const userBadge = new UserBadge({
 });
 
 const searchInput = new Input({
-  name: 'Search',
+  name: 'search',
   placeholder: 'search...',
   type: 'text',
   className: 'chatInput',
@@ -58,13 +64,13 @@ const messageOptionsButton = new Button({
 });
 
 const messageInput = new Input({
-  name: 'Message',
+  name: 'message',
   placeholder: 'Message',
   type: 'text',
   className: 'messageInput',
   events: {
     input: () => {
-      const isValid = validateInput({ name: 'Message', regex: validationParams.Message });
+      const isValid = validateInput({ name: 'message', regex: validationParams.message });
       messageSubmitButton.setProps({
         disabled: !isValid,
       });
@@ -102,6 +108,7 @@ const ChatPage = new ChatPageComponent({
   searchInput,
   contacts: cardsBlock,
   messageForm,
+  messages,
 });
 
 export default ChatPage;
