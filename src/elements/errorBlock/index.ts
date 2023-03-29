@@ -1,9 +1,22 @@
-import { compile } from 'handlebars';
-
+import Block from '../../utils/block';
+import Button from '../button';
 import errorBlockTmp from './errorBlockTmp';
 
-const errorBlock = () => {
-  return compile(errorBlockTmp)({});
+type ErrorBlockProps = {
+  errorTitle: string;
+  errorText: string;
+  button: Button;
 };
 
-export default { errorBlock };
+class ErrorBlock extends Block<ErrorBlockProps> {
+  constructor(props: ErrorBlockProps) {
+    super(props);
+  }
+
+  render() {
+    const str = this.compile(errorBlockTmp, this.props);
+    return str;
+  }
+}
+
+export default ErrorBlock;

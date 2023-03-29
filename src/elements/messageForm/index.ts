@@ -16,7 +16,6 @@ class MessageForm extends Block<MessageFormProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(messageFormTmp, this.props);
     return str;

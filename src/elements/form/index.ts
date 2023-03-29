@@ -21,7 +21,6 @@ class Form extends Block<FormProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(formTmp, this.props);
     return str;

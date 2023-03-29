@@ -1,5 +1,5 @@
 import { validateFormInput, setDefaultLabelState, handleInvalid, handleSubmitForm } from '../../utils/helpers';
-import { validationFormsConfig, registrationInputsConfig } from '../../utils/consts';
+import { registrationInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';
 import Input from '../../elements/input';
@@ -14,13 +14,12 @@ type RegistrationPageProps = {
 };
 
 const inputsWithLlabel = registrationInputsConfig.map(item => {
-  // eslint-disable-next-line no-new
   return new InputWithLabel({
     label: item.label,
     input: new Input({
       ...item,
       events: {
-        blur: () => validateFormInput(validationFormsConfig[item.name as keyof typeof validationFormsConfig]!),
+        blur: () => validateFormInput(item.name),
         focus: () => setDefaultLabelState(item.name),
         invalid: () => handleInvalid(item.name),
       },
@@ -54,7 +53,6 @@ class RegistrationPageComponent extends Block<RegistrationPageProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(registrationTmp, this.props);
     return str;

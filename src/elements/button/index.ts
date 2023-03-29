@@ -25,14 +25,11 @@ type CircleButtonProps = {
 };
 
 type ButtonProps = DefaultButtonProps | CircleButtonProps;
-
-// eslint-disable-next-line import/prefer-default-export
 class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(buttonTmp, this.props);
     return str;

@@ -1,5 +1,4 @@
 import { validateInput } from '../../utils/helpers';
-import { validationParams } from '../../utils/consts';
 import Message from '../../elements/message';
 import Button from '../../elements/button';
 import Input from '../../elements/input';
@@ -24,7 +23,6 @@ type ChatProps = {
 };
 
 const cards = mockCards.map(item => {
-  // eslint-disable-next-line no-new
   return new ContactCard(item);
 });
 
@@ -70,7 +68,7 @@ const messageInput = new Input({
   className: 'messageInput',
   events: {
     input: () => {
-      const isValid = validateInput({ name: 'message', regex: validationParams.message });
+      const isValid = validateInput('message').result;
       messageSubmitButton.setProps({
         disabled: !isValid,
       });
@@ -95,7 +93,6 @@ class ChatPageComponent extends Block<ChatProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(chatTmp, this.props);
     return str;

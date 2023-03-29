@@ -11,7 +11,6 @@ class UserBadge extends Block<UserBadgeProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(userBadgeTmp, this.props);
     return str;

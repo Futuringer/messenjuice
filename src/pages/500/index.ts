@@ -1,12 +1,37 @@
-import Handlebars from 'handlebars';
-import serverErrorTmp from './500Tmp';
+import Block from '../../utils/block';
+import Button from '../../elements/button';
+import serverErrorTmp from './serverErrorTmp';
+import ErrorBlock from '../../elements/errorBlock';
 
-const renderServerError = () => {
-  return Handlebars.compile(serverErrorTmp)({
-    errorTitle: '500',
-    errorText: 'Server error',
-    button: { type: 'button', text: 'Back to chat', isActive: true },
-  });
+type ClientErrorPageProps = {
+  errorBlock: ErrorBlock;
 };
 
-export default renderServerError;
+const backToChatButton = new Button({
+  variant: 'form',
+  text: 'Back to chat',
+  type: 'button',
+  isActive: true,
+});
+
+const errorBlock = new ErrorBlock({
+  button: backToChatButton,
+  errorText: 'Server error',
+  errorTitle: '500',
+});
+class ServerErrorPageComponent extends Block<ClientErrorPageProps> {
+  constructor(props: ClientErrorPageProps) {
+    super(props);
+  }
+
+  render() {
+    const str = this.compile(serverErrorTmp, this.props);
+    return str;
+  }
+}
+
+const ServerErrorPage = new ServerErrorPageComponent({
+  errorBlock,
+});
+
+export default ServerErrorPage;

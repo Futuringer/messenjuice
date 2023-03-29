@@ -1,6 +1,5 @@
-/* eslint-disable class-methods-use-this */
 import Handlebars from 'handlebars';
-import EventBus, { Handler } from './eventBus';
+import EventBus from './eventBus';
 
 class Block<P extends Record<string, any> = any> {
   id = Math.floor(Math.random() * 100000);
@@ -14,14 +13,15 @@ class Block<P extends Record<string, any> = any> {
 
   _element: HTMLElement | null = null;
 
-  _meta: any;
+  _meta: { props: any };
+
+  children: Record<string, Block | Block[]>;
 
   props: P;
 
   eventBus: () => EventBus;
 
-  // eslint-disable-next-line @typescript-eslint/default-param-last
-  constructor(propsAndChildren: P) {
+  constructor(propsAndChildren: { props: P; children?: Record<string, Block | Block[]> } | P) {
     const { children, props } = this._getChildren(propsAndChildren);
     this.children = children;
 
@@ -30,7 +30,7 @@ class Block<P extends Record<string, any> = any> {
       props,
     };
 
-    this.props = this._makePropsProxy(props);
+    this.props = this._makePropsProxy(props as P);
 
     this.eventBus = () => eventBus;
 
@@ -38,9 +38,9 @@ class Block<P extends Record<string, any> = any> {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildren(propsAndChildren) {
-    const children = {};
-    const props = {};
+  _getChildren(propsAndChildren: any) {
+    const children: Record<string, Block | Block[]> = {};
+    const props: Record<string, any> = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -60,9 +60,7 @@ class Block<P extends Record<string, any> = any> {
     const { events = {} } = this.props as P & { events: Record<string, () => void> };
 
     Object.keys(events).forEach(eventName => {
-      // console.log(eventName, this._element);
       this._element?.addEventListener(eventName, events[eventName], false);
-      // this._element?.addEventListener('click', () => console.log(12));
     });
   }
 
@@ -74,8 +72,7 @@ class Block<P extends Record<string, any> = any> {
   }
 
   _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+    this._element = this._createDocumentElement();
   }
 
   _init() {
@@ -86,21 +83,21 @@ class Block<P extends Record<string, any> = any> {
 
   init() {}
 
+  dispatchComponentDidMount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+  }
+
   _componentDidMount() {
     this.componentDidMount();
 
     Object.values(this.children).forEach(child => {
-      child.dispatchComponentDidMount();
+      if (!Array.isArray(child)) {
+        child.dispatchComponentDidMount();
+      }
     });
   }
 
   componentDidMount() {}
-
-  dispatchComponentDidMount() {
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-
-    // Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
-  }
 
   _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
@@ -119,7 +116,6 @@ class Block<P extends Record<string, any> = any> {
       return;
     }
     const newProps = { ...this.props, ...nextProps };
-    // console.log(1, this.props, 2, nextProps, 3, newProps);
     Object.assign(this.props, newProps);
   };
 
@@ -137,8 +133,6 @@ class Block<P extends Record<string, any> = any> {
     }
 
     this._addEvents();
-    // console.log('props', this.props);
-    // console.log('this._element', this._element);
   }
 
   protected render(): DocumentFragment {
@@ -150,7 +144,7 @@ class Block<P extends Record<string, any> = any> {
 
     Object.entries(this.children).forEach(([key, child]) => {
       if (Array.isArray(child)) {
-        propsAndStubs[key] = child.map(child => `<div data-id="${child.id}"></div>`);
+        propsAndStubs[key] = child.map(item => `<div data-id="${item.id}"></div>`);
         propsAndStubs[key] = propsAndStubs[key].join('');
       } else {
         propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
@@ -166,21 +160,21 @@ class Block<P extends Record<string, any> = any> {
       if (Array.isArray(component)) {
         component.forEach(item => {
           const stub = temp.content.querySelector(`[data-id="${item.id}"]`);
-          item.getContent()?.append(...Array.from(stub.childNodes));
-          stub.replaceWith(item.getContent()!);
+          if (stub) {
+            item.getContent()?.append(...Array.from(stub.childNodes));
+            stub.replaceWith(item.getContent()!);
+          }
         });
       } else {
         const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-        component.getContent()?.append(...Array.from(stub.childNodes));
-        stub.replaceWith(component.getContent()!);
+        if (stub) {
+          component.getContent()?.append(...Array.from(stub.childNodes));
+          stub.replaceWith(component.getContent()!);
+        }
       }
-
-      // if (!stub) {
-      // }
     });
 
     return temp.content;
-    // return html;
   }
 
   getContent() {
@@ -188,8 +182,6 @@ class Block<P extends Record<string, any> = any> {
   }
 
   _makePropsProxy(props: P) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
 
@@ -200,11 +192,8 @@ class Block<P extends Record<string, any> = any> {
       },
       set(target, prop: string, value) {
         const oldTarget = { ...target };
-        // eslint-disable-next-line no-param-reassign
         target[prop as keyof P] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
@@ -214,9 +203,8 @@ class Block<P extends Record<string, any> = any> {
     });
   }
 
-  _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+  _createDocumentElement() {
+    return document.createElement('div');
   }
 
   show() {

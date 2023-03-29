@@ -1,6 +1,6 @@
 const serverErrorTmp = `
 <div class='center-content full-height'>
-{{>errorBlock}}
+  {{{errorBlock}}}
 </div>`;
 
 export default serverErrorTmp;

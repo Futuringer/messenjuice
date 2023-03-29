@@ -38,8 +38,11 @@
     "space-in-parens": "error",
     "no-multiple-empty-lines": "error",
     "prefer-const": "error",
-    "no-use-before-define": "error",
     "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off",
+    "no-param-reassign": "off",
+    "class-methods-use-this": "off",
+    "no-console": "off",
   },
   "parserOptions": {
     "sourceType": "module",

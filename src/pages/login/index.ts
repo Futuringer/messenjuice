@@ -1,11 +1,5 @@
-import {
-  validateFormInput,
-  setDefaultLabelState,
-  handleInvalid,
-  handleSubmitForm,
-  validateFormInput2,
-} from '../../utils/helpers';
-import { validationFormsConfig, loginInputsConfig } from '../../utils/consts';
+import { setDefaultLabelState, handleInvalid, handleSubmitForm, validateFormInput } from '../../utils/helpers';
+import { loginInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';
 import Input from '../../elements/input';
@@ -20,13 +14,12 @@ type LoginPageProps = {
 };
 
 const inputsWithLlabel = loginInputsConfig.map(item => {
-  // eslint-disable-next-line no-new
   return new InputWithLabel({
     label: item.label,
     input: new Input({
       ...item,
       events: {
-        blur: () => validateFormInput2(item.name),
+        blur: () => validateFormInput(item.name),
         focus: () => setDefaultLabelState(item.name),
         invalid: () => handleInvalid(item.name),
       },
@@ -60,7 +53,6 @@ class LoginPageComponent extends Block<LoginPageProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(loginTmp, this.props);
     return str;

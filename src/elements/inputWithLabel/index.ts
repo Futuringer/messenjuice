@@ -1,9 +1,6 @@
 import Block from '../../utils/block';
 import inputWithLabelTmp from './inputWithLabelTmp';
 import Input from '../input';
-// const input = () => {
-//   return compile(inputTmp)({});
-// };
 
 export type InputWithLabelProps = {
   label: string;
@@ -25,10 +22,11 @@ class InputWithLabel extends Block<InputWithLabelProps> {
   init() {
     const name = this.element?.getElementsByTagName('input')[0].getAttribute('name');
     const label = this.element?.getElementsByTagName('label')[0];
-    label?.setAttribute('for', name!);
-    // label?.setAttribute('defaultText', this.props.label!);
+    if (name) {
+      label?.setAttribute('for', name);
+    }
     if (label) {
-      label.dataset.default = this.props.label!;
+      label.dataset.default = this.props.label;
     }
   }
 }

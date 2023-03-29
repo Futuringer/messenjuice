@@ -9,9 +9,9 @@ export type InputProps = {
   isRequired?: boolean;
   placeholder: string;
   events?: {
-    blur?: (value: HTMLInputElement) => void;
-    focus?: (value: HTMLInputElement) => void;
-    invalid?: (value: HTMLInputElement) => void;
+    blur?: (value: Event) => void;
+    focus?: (value: Event) => void;
+    invalid?: (value: Event) => void;
     input?: (value: Event) => void;
   };
 };
@@ -21,7 +21,6 @@ class Input extends Block<InputProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(inputTmp, this.props);
     return str;

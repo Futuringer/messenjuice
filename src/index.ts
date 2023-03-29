@@ -2,8 +2,9 @@ import Handlebars from 'handlebars';
 import RegistrationPage from './pages/registration';
 import LoginPage from './pages/login';
 import ChatPage from './pages/chat';
+import ClientErrorPage from './pages/404';
+import ServerErrorPage from './pages/500';
 import ProfilePage from './pages/profile';
-import { renderClientError, renderServerError } from './pages';
 import errorBlockTmp from './elements/errorBlock/errorBlockTmp';
 import buttonTmp from './elements/button/buttonTmp';
 import formTmp from './elements/form/formTmp';
@@ -31,13 +32,13 @@ if (container) {
       container.append(ProfilePage.getContent()!);
       break;
     case '/500':
-      container.innerHTML = renderServerError();
+      container.append(ServerErrorPage.getContent()!);
       break;
     case '/chat':
       container.append(ChatPage.getContent()!);
       break;
     default:
-      container.innerHTML = renderClientError();
+      container.append(ClientErrorPage.getContent()!);
       break;
   }
 }

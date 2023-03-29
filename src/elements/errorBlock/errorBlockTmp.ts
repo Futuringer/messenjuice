@@ -6,7 +6,7 @@ const errorBlockTmp = `
   <p class="error__text">
     {{errorText}}
   </p>
-  {{>button button}}
+  {{{button}}}
 </div>
 `;
 

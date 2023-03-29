@@ -1,5 +1,5 @@
 import { validateFormInput, setDefaultLabelState, handleInvalid, handleSubmitForm } from '../../utils/helpers';
-import { validationFormsConfig, profileInputsConfig } from '../../utils/consts';
+import { profileInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';
 import Input from '../../elements/input';
@@ -29,13 +29,12 @@ const cancelButton = new Button({
 });
 
 const inputsWithLlabel = profileInputsConfig.map(item => {
-  // eslint-disable-next-line no-new
   return new InputWithLabel({
     label: item.label,
     input: new Input({
       ...item,
       events: {
-        blur: () => validateFormInput(validationFormsConfig[item.name as keyof typeof validationFormsConfig]!),
+        blur: () => validateFormInput(item.name),
         focus: () => setDefaultLabelState(item.name),
         invalid: () => handleInvalid(item.name),
       },
@@ -44,14 +43,14 @@ const inputsWithLlabel = profileInputsConfig.map(item => {
 });
 
 const profileForm2 = new Form({
-  formName: 'profileForm2',
+  formName: 'profileForm',
   formText: 'Profile',
   singleColumn: false,
   buttons: [changeInfoButton, cancelButton],
   inputs: [...inputsWithLlabel],
   events: {
     submit: e => {
-      handleSubmitForm(e, 'profileForm2');
+      handleSubmitForm(e, 'profileForm');
     },
   },
 });
@@ -60,7 +59,6 @@ class ProfilePageComponent extends Block<ProfilePageProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(profileTmp, this.props);
     return str;

@@ -11,7 +11,6 @@ class CardsBlock extends Block<CardsBlockProps> {
     super(props);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     const str = this.compile(cardsBlockTmp, this.props);
     return str;
