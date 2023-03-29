@@ -6,12 +6,17 @@ enum METHODS {
 }
 
 type OptionsType = {
-  method: METHODS;
   data?: any;
   timeout?: number;
 };
 
+type HTTPMethod = (url: string, options?: OptionsType) => Promise<unknown>;
+
 function queryStringify(data: Record<string, any>) {
+  if (!data) {
+    return '';
+  }
+
   let result = '?';
 
   for (const key in data) {
@@ -27,29 +32,33 @@ function queryStringify(data: Record<string, any>) {
 }
 
 class HTTPTransport {
-  get = (url: string, options: OptionsType = { method: METHODS.GET }) => {
-    return this.request(url, { ...options, data: queryStringify(options.data), method: METHODS.GET }, options.timeout);
+  get: HTTPMethod = (url, options) => {
+    return this.request(
+      url,
+      { ...options, data: queryStringify(options?.data), method: METHODS.GET },
+      options?.timeout,
+    );
   };
 
-  post(url: string, options: OptionsType) {
-    return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
-  }
+  post: HTTPMethod = (url, options) => {
+    return this.request(url, { ...options, method: METHODS.POST }, options?.timeout);
+  };
 
-  put(url: string, options: OptionsType) {
-    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
-  }
+  put: HTTPMethod = (url, options) => {
+    return this.request(url, { ...options, method: METHODS.PUT }, options?.timeout);
+  };
 
-  delete(url: string, options: OptionsType) {
-    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
-  }
+  delete: HTTPMethod = (url, options) => {
+    return this.request(url, { ...options, method: METHODS.DELETE }, options?.timeout);
+  };
 
-  request = (url: string, options: OptionsType = { method: METHODS.GET }, timeout = 5000) => {
+  request = (url: string, options: OptionsType & { method: METHODS } = { method: METHODS.GET }, timeout = 5000) => {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
-      const newUrl = method === METHODS.GET || data ? `${url}${data}` : url;
+      const newUrl = method === METHODS.GET && data ? `${url}${data}` : url;
       xhr.open(method, newUrl);
       xhr.timeout = timeout;
 
@@ -64,7 +73,7 @@ class HTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   };
