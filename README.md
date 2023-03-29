@@ -12,6 +12,15 @@
 В проект внедрен Typescript и произведена стилизация кода.
 Текущий прогресс проекта можно просмотреть по приложенной ссылке netlify.
 
+# Доступные страницы:
+
+- /sign-in
+- /sign-up
+- /profile
+- /chat
+- /500
+- любые другие - 404
+
 # Установка и запуск:
 
 установка зависимостей
@@ -54,4 +63,4 @@ npm run start
 - [Проект онлайн]
 
 [макет проекта]: https://www.figma.com/file/z5OFT5iabuAW49OTRV1MqC/MY_CHAT_SPRINT_1?node-id=35447-2&t=WxBaDd2pMJJvdNQg-0
-[проект онлайн]: https://messenjuice.netlify.app/login
+[проект онлайн]: https://messenjuice.netlify.app/sign-in
