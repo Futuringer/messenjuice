@@ -1,0 +1,16 @@
+@use './../../styles/variables/colors.scss' as v;
+
+.messageForm {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 14px;
+
+  &__buttonContainer {
+    flex-shrink: 0;
+  }
+
+  &__inputContainer {
+    flex-grow: 1;
+  }
+}

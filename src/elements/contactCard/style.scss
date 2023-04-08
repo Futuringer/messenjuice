@@ -1,0 +1,82 @@
+@use './../../styles/variables/colors.scss' as v;
+
+.card {
+  &__container {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    display: flex;
+    background-color: v.$baseLight;
+    border-radius: 8px;
+    padding: 6px;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  &__avatar {
+    margin-right: 12px;
+    width: 42px;
+    height: 42px;
+  }
+
+  &__textContainer {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: 100%;
+    text-align: left;
+    padding-right: 10px;
+  }
+
+  &__infoContainer {
+    flex-direction: column;
+    display: flex;
+    margin-left: auto;
+  }
+
+  &__name {
+    color: v.$neutralDark;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+
+  &__message {
+    min-width: 0;
+    width: 100%;
+    font-size: 12px;
+    line-height: 14px;
+    color: black;
+    opacity: 0.4;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__time {
+    color: v.$neutralDark;
+    font-size: 10px;
+    line-height: 12px;
+    margin-bottom: auto;
+  }
+
+  &__unreadMessages {
+    border-radius: 13px;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+    line-height: 26px;
+    text-align: center;
+    background-color: v.$baseNeutral;
+    color: v.$neutralDark;
+  }
+}

@@ -1,0 +1,43 @@
+{
+    "extends": ["stylelint-config-recommended","stylelint-config-standard-scss"],
+    "plugins": ["stylelint-scss", "stylelint-prettier"],
+    "rules": {
+        "at-rule-no-unknown": null,
+        "scss/at-rule-no-unknown": true,
+        "alpha-value-notation": null,
+        "color-function-notation": null,
+        "color-hex-case": "lower",
+        "color-hex-length": null,
+        "custom-property-empty-line-before": [
+            "always",
+            {
+                "except": ["after-custom-property", "first-nested"],
+                "ignore": ["after-comment", "inside-single-line-block"]
+            }
+        ],
+        "declaration-block-no-redundant-longhand-properties": null,
+        "declaration-empty-line-before": null,
+        "function-name-case": null,
+        "indentation": 2,
+        "max-empty-lines": 1,
+        "no-descending-specificity": null,
+        "prettier/prettier": true,
+        "rule-empty-line-before": [
+            "always-multi-line",
+            {
+                "except": ["first-nested"],
+                "ignore": ["after-comment"]
+            }
+        ],
+        "scss/at-function-pattern": "[a-zA-Z]+",
+        "scss/at-mixin-argumentless-call-parentheses": "always",
+        "scss/at-mixin-parentheses-space-before": "never",
+        "scss/at-mixin-pattern": "[a-zA-Z]+",
+        "scss/dollar-variable-empty-line-before": null,
+        "scss/dollar-variable-pattern": "^[a-z][a-zA-Z]+",
+        "selector-class-pattern": "[a-zA-Z]+",
+        "selector-pseudo-class-no-unknown": null,
+        "shorthand-property-no-redundant-values": null,
+        "value-keyword-case": null
+    }
+}

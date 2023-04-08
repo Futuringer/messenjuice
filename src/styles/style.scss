@@ -1,12 +1,19 @@
-@use "./base.scss";
-@use "./../layouts/splitScreen/style.scss" as splitScreenStyle;
-@use "./../layouts/centeredContent/style.scss" as centeredContentStyle;
-
-@use "./../elements/input/style.scss" as inputStyle;
-@use "./../elements/button/style.scss" as buttonStyle;
-@use "./../elements/form/style.scss" as formStyle;
-@use "./../elements/errorBlock/style.scss" as errorBlockStyle;
-
-@use "./../pages/login/style.scss" as loginPageStyle;
-@use "./../pages/registration/style.scss" as registrationPageStyle;
-@use "./../pages/profile/style.scss" as profilePageStyle;
+@use './base.scss';
+@use './../layouts/splitScreen/style.scss' as splitScreenStyle;
+@use './../layouts/centeredContent/style.scss' as centeredContentStyle;
+@use './../elements/contactCard/style.scss' as contactCardStyle;
+@use './../elements/cardsBlock/style.scss' as cardsBlock;
+@use './../elements/input/style.scss' as inputStyle;
+@use './../elements/button/style.scss' as buttonStyle;
+@use './../elements/form/style.scss' as formStyle;
+@use './../elements/errorBlock/style.scss' as errorBlockStyle;
+@use './../elements/userBadge/style.scss' as userBadgeStyle;
+@use './../elements/messageForm/style.scss' as messageFormStyle;
+@use './../elements/message/style.scss' as messageStyle;
+@use './../pages/login/style.scss' as loginPageStyle;
+@use './../pages/registration/style.scss' as registrationPageStyle;
+@use './../pages/profile/style.scss' as profilePageStyle;
+@use './../pages/chat/style.scss' as chatPageStyle;
+@use './components/optionsButton.scss' as optionsButtonStyle;
+@use './components/chatInput.scss' as chatInputStyle;
+@use './components/messageInput.scss' as messageInputStyle;

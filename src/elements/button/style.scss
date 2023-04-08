@@ -1,13 +1,9 @@
-@use "./../../styles/variables/colors.scss" as v;
+@use './../../styles/variables/colors.scss' as v;
 
 .button {
   width: 100%;
   border: none;
   outline: none;
-  border-radius: 10px;
-  padding: 8px;
-  background-color: v.$neutraMediumlLigth;
-  color: v.$neutralDark;
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
@@ -20,8 +16,30 @@
     opacity: 0.5;
   }
 
-  &_active {
+  &_form {
+    border-radius: 10px;
+    padding: 8px;
+    background-color: v.$neutraMediumlLigth;
+    color: v.$neutralDark;
+  }
+
+  &_active_form {
+    border-radius: 10px;
+    padding: 8px;
     color: v.$neutraMediumlLigth;
     background-color: v.$neutralDark;
+  }
+
+  &_circle {
+    padding: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 23px;
+    line-height: 0;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
   }
 }
