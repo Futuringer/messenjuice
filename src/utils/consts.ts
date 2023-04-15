@@ -4,7 +4,7 @@ import { InputWithLabelProps } from 'src/elements/inputWithLabel';
 export const validationParams = {
   login: [
     { regex: /^[a-zA-Z0-9_-]*$/, message: 'Invalid characters' },
-    { regex: /[a-zA-Z]+$/, message: 'Field must contain at least one letter' },
+    { regex: /[a-zA-Z]/, message: 'Field must contain at least one letter' },
     { regex: /^.{3,20}$/, message: 'Field must contain from 3 to 20 characters' },
   ],
   password: [
@@ -46,7 +46,8 @@ export const validationParams = {
 export type InputsCollectionType = keyof typeof validationParams;
 
 type InputFormsConfigType = Array<
-  Omit<InputProps, 'name'> & Pick<InputWithLabelProps, 'label'> & { name: keyof typeof validationParams }
+  Omit<InputProps, 'name'> &
+    Pick<InputWithLabelProps, 'label'> & { name: keyof typeof validationParams; value?: string }
 >;
 
 export const loginInputsConfig: InputFormsConfigType = [
