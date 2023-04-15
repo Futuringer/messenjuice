@@ -1,7 +1,9 @@
 import Handlebars from 'handlebars';
 import EventBus from './eventBus';
+import { isEqual } from './helpers';
 
-class Block<P extends Record<string, any> = any> {
+type P = Record<string, any>;
+class Block {
   id = Math.floor(Math.random() * 100000);
 
   static EVENTS = {
@@ -21,7 +23,7 @@ class Block<P extends Record<string, any> = any> {
 
   eventBus: () => EventBus;
 
-  constructor(propsAndChildren: { props: P; children?: Record<string, Block | Block[]> } | P) {
+  constructor(propsAndChildren: P) {
     const { children, props } = this._getChildren(propsAndChildren);
     this.children = children;
 
@@ -38,7 +40,7 @@ class Block<P extends Record<string, any> = any> {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildren(propsAndChildren: any) {
+  _getChildren(propsAndChildren: P): { props: P; children: Record<string, Block | Block[]> } {
     const children: Record<string, Block | Block[]> = {};
     const props: Record<string, any> = {};
 
@@ -53,7 +55,7 @@ class Block<P extends Record<string, any> = any> {
       }
     });
 
-    return { children, props };
+    return { props: props as P, children };
   }
 
   _addEvents() {
@@ -92,6 +94,7 @@ class Block<P extends Record<string, any> = any> {
   init() {}
 
   dispatchComponentDidMount() {
+    console.log('dispatchComponentDidMount');
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
@@ -116,7 +119,8 @@ class Block<P extends Record<string, any> = any> {
   }
 
   componentDidUpdate(oldProps: P, newProps: P) {
-    return oldProps !== newProps;
+    // console.log('oldProps, newProps', oldProps, newProps, isEqual(oldProps, newProps));
+    return !isEqual(oldProps, newProps);
   }
 
   setProps = (nextProps: Partial<P>) => {
