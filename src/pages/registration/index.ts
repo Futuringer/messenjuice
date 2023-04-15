@@ -7,6 +7,9 @@ import Button from '../../elements/button';
 import registrationTmp from './registrationTmp';
 import logo from '../../../static/imgs/logo.svg';
 import Block from '../../utils/block';
+import Link from '../../elements/link';
+import { handleSignUpSubmit } from './registration';
+import store, { StoreEvents } from '../../utils/store';
 
 type RegistrationPageProps = {
   img: string;
@@ -34,23 +37,32 @@ const signUpButton = new Button({
   isActive: true,
 });
 
-const registrationForm = new Form({
-  formName: 'loginForm',
-  formText: 'Sign in',
-  descriptionText: 'Already have an account?',
+const loginLink = new Link({
   descriptionLinkText: 'Log in',
-  descriptionLink: './sign-in',
+  descriptionLink: '/',
+  linkClass: 'form__description-link',
+});
+
+const registrationForm = new Form({
+  formName: 'registrationForm',
+  formText: 'Sign up',
+  descriptionText: 'Already have an account?',
+  descriptionLink: loginLink,
   singleColumn: true,
   buttons: [signUpButton],
   inputs: [...inputsWithLlabel],
   events: {
-    submit: e => handleSubmitForm(e, 'loginForm'),
+    submit: e => handleSignUpSubmit(e, 'registrationForm'),
   },
 });
 
-class RegistrationPageComponent extends Block<RegistrationPageProps> {
-  constructor(props: RegistrationPageProps) {
-    super(props);
+class RegistrationPageComponent extends Block {
+  constructor(props?: RegistrationPageProps) {
+    super({ img: logo, form: registrationForm, ...props });
+
+    store.on(StoreEvents.Updated, () => {
+      (this.children.form as Block).props.errorText = store.getState().registrationFormData.errorText;
+    });
   }
 
   render() {
@@ -59,9 +71,4 @@ class RegistrationPageComponent extends Block<RegistrationPageProps> {
   }
 }
 
-const RegistrationPage = new RegistrationPageComponent({
-  img: logo,
-  form: registrationForm,
-});
-
-export default RegistrationPage;
+export default RegistrationPageComponent;

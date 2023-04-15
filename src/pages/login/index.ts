@@ -1,4 +1,7 @@
-import { setDefaultLabelState, handleInvalid, handleSubmitForm, validateFormInput } from '../../utils/helpers';
+import store, { StoreEvents } from '../../utils/store';
+import Link from '../../elements/link';
+import { setDefaultLabelState, handleInvalid, validateFormInput } from '../../utils/helpers';
+import { handleSignInSubmit } from './login';
 import { loginInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';
@@ -10,7 +13,7 @@ import Block from '../../utils/block';
 
 type LoginPageProps = {
   img: string;
-  form: Form;
+  form: typeof Form;
 };
 
 const inputsWithLlabel = loginInputsConfig.map(item => {
@@ -34,23 +37,32 @@ const signInButton = new Button({
   isActive: true,
 });
 
+const createAccountLink = new Link({
+  descriptionLinkText: 'Create one',
+  descriptionLink: '/sign-up',
+  linkClass: 'form__description-link',
+});
+
 const loginForm = new Form({
   formName: 'loginForm',
   formText: 'Sign in',
   descriptionText: 'No account?',
-  descriptionLinkText: 'Create one',
-  descriptionLink: './sign-up',
+  descriptionLink: createAccountLink,
   singleColumn: true,
   buttons: [signInButton],
   inputs: [...inputsWithLlabel],
   events: {
-    submit: e => handleSubmitForm(e, 'loginForm'),
+    submit: (e: HTMLFormElement) => handleSignInSubmit(e, 'loginForm'),
   },
 });
 
-class LoginPageComponent extends Block<LoginPageProps> {
-  constructor(props: LoginPageProps) {
-    super(props);
+class LoginPageComponent extends Block {
+  constructor(props?: LoginPageProps) {
+    super({ img: logo, form: loginForm, ...props });
+
+    store.on(StoreEvents.Updated, () => {
+      (this.children.form as Block).props.errorText = store.getState().loginFormData.errorText;
+    });
   }
 
   render() {
@@ -59,9 +71,4 @@ class LoginPageComponent extends Block<LoginPageProps> {
   }
 }
 
-const LoginPage = new LoginPageComponent({
-  img: logo,
-  form: loginForm,
-});
-
-export default LoginPage;
+export default LoginPageComponent;

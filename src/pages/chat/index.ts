@@ -88,9 +88,17 @@ const messageForm = new MessageForm({
   },
 });
 
-class ChatPageComponent extends Block<ChatProps> {
-  constructor(props: ChatProps) {
-    super(props);
+class ChatPageComponent extends Block {
+  constructor(props?: ChatProps) {
+    super({
+      optionsButton: messageOptionsButton,
+      userBadge,
+      searchInput,
+      contacts: cardsBlock,
+      messageForm,
+      messages,
+      ...props,
+    });
   }
 
   render() {
@@ -99,13 +107,4 @@ class ChatPageComponent extends Block<ChatProps> {
   }
 }
 
-const ChatPage = new ChatPageComponent({
-  optionsButton: messageOptionsButton,
-  userBadge,
-  searchInput,
-  contacts: cardsBlock,
-  messageForm,
-  messages,
-});
-
-export default ChatPage;
+export default ChatPageComponent;

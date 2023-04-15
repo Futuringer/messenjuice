@@ -19,9 +19,9 @@ const errorBlock = new ErrorBlock({
   errorText: 'Page not found',
   errorTitle: '404',
 });
-class ClientErrorPageComponent extends Block<ClientErrorPageProps> {
-  constructor(props: ClientErrorPageProps) {
-    super(props);
+class ClientErrorPageComponent extends Block {
+  constructor(props?: ClientErrorPageProps) {
+    super({ errorBlock, ...props });
   }
 
   render() {
@@ -30,8 +30,4 @@ class ClientErrorPageComponent extends Block<ClientErrorPageProps> {
   }
 }
 
-const ClientErrorPage = new ClientErrorPageComponent({
-  errorBlock,
-});
-
-export default ClientErrorPage;
+export default ClientErrorPageComponent;

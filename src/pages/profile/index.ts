@@ -1,3 +1,5 @@
+import authController from '../../controllers/authController';
+import { withStore } from '../../utils/store';
 import { validateFormInput, setDefaultLabelState, handleInvalid, handleSubmitForm } from '../../utils/helpers';
 import { profileInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
@@ -8,10 +10,10 @@ import profileTmp from './profileTmp';
 import logo from '../../../static/imgs/avatarPlaceholder.png';
 import Block from '../../utils/block';
 
-type ProfilePageProps = {
+export type ProfilePageProps = {
   name: string;
   img: string;
-  form: Form;
+  form: typeof Form;
 };
 
 const changeInfoButton = new Button({
@@ -42,21 +44,26 @@ const inputsWithLlabel = profileInputsConfig.map(item => {
   });
 });
 
-const profileForm2 = new Form({
+const profileForm = new Form({
   formName: 'profileForm',
   formText: 'Profile',
   singleColumn: false,
   buttons: [changeInfoButton, cancelButton],
   inputs: [...inputsWithLlabel],
   events: {
-    submit: e => {
-      handleSubmitForm(e, 'profileForm');
+    submit: (e: HTMLFormElement) => {
+      handleSubmitForm(e, 'profileForm', () => console.log(12));
     },
   },
 });
-class ProfilePageComponent extends Block<ProfilePageProps> {
+class ProfilePageComponent extends Block {
   constructor(props: ProfilePageProps) {
-    super(props);
+    super({ ...props, name: 'Vlad', img: logo, form: profileForm });
+  }
+
+  init(): void {
+    // authController.fetchUser();
+    // console.log('this.props', this.props);
   }
 
   render() {
@@ -65,10 +72,7 @@ class ProfilePageComponent extends Block<ProfilePageProps> {
   }
 }
 
-const ProfilePage = new ProfilePageComponent({
-  name: 'Vlad',
-  img: logo,
-  form: profileForm2,
-});
+const withUser = withStore(state => ({ ...state.user }));
 
-export default ProfilePage;
+const ProfilewithUser = withUser(ProfilePageComponent);
+export default ProfilewithUser;

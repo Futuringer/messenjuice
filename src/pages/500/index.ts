@@ -19,9 +19,9 @@ const errorBlock = new ErrorBlock({
   errorText: 'Server error',
   errorTitle: '500',
 });
-class ServerErrorPageComponent extends Block<ClientErrorPageProps> {
-  constructor(props: ClientErrorPageProps) {
-    super(props);
+class ServerErrorPageComponent extends Block {
+  constructor(props?: ClientErrorPageProps) {
+    super({ errorBlock, ...props });
   }
 
   render() {
@@ -30,8 +30,4 @@ class ServerErrorPageComponent extends Block<ClientErrorPageProps> {
   }
 }
 
-const ServerErrorPage = new ServerErrorPageComponent({
-  errorBlock,
-});
-
-export default ServerErrorPage;
+export default ServerErrorPageComponent;
