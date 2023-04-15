@@ -13,6 +13,10 @@ const formTmp = `
   </div>
   {{/if}}
 
+  {{#if errorText}}
+  {{errorText}}
+  {{/if}}
+
   <div class="form__buttons-container">
       {{{buttons}}}
   </div>
@@ -20,10 +24,13 @@ const formTmp = `
   {{#if descriptionText}}
     <p class="form__description">
       {{descriptionText}}
-      <a class="form__description-link" href={{descriptionLink}}>{{descriptionLinkText}}</a>
+      {{{descriptionLink}}}
     </p>
   {{/if}}
 </form>
 `;
 
 export default formTmp;
+
+// {{descriptionText}}
+// <a class="form__description-link" href={{descriptionLink}}>{{descriptionLinkText}}</a>

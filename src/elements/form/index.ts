@@ -2,21 +2,23 @@ import Block from '../../utils/block';
 import formTmp from './formTmp';
 import Button from '../button';
 import InputWithLabel from '../inputWithLabel';
+// import Link from '../link';
 
 type FormProps = {
   formName: string;
   formText: string;
   buttons: Button[];
   descriptionText?: string;
-  descriptionLinkText?: string;
-  descriptionLink?: string;
+  descriptionLink?: any;
+  errorText?: string;
   singleColumn?: boolean;
   inputs?: InputWithLabel[];
   events?: {
     submit?: (value: HTMLFormElement) => void;
+    click?: (value: HTMLFormElement) => void;
   };
 };
-class Form extends Block<FormProps> {
+class Form extends Block {
   constructor(props: FormProps) {
     super(props);
   }
