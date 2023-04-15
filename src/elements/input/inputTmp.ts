@@ -6,6 +6,7 @@ const inputTmp = `
     {{/if}}
     name={{name}}
     type={{type}}
+    value="{{value}}"
     placeholder="{{placeholder}}"
   />
 `;
