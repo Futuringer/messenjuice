@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
-
     "moduleResolution": "Node",
     "target": "esnext",
     "module": "commonjs",
@@ -15,9 +13,8 @@
     "outDir": "dist",
     "rootDir": ".",
     "strict": false,
-    "esModuleInterop": true ,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "declaration": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
