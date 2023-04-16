@@ -31,6 +31,3 @@ const formTmp = `
 `;
 
 export default formTmp;
-
-// {{descriptionText}}
-// <a class="form__description-link" href={{descriptionLink}}>{{descriptionLinkText}}</a>
