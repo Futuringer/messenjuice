@@ -1,7 +1,7 @@
 import { InputsCollectionType } from 'src/utils/consts';
 import Block from '../../utils/block';
 import inputTmp from './inputTmp';
-import { withStore } from '../../utils/store';
+import store, { StoreEvents, withStore } from '../../utils/store';
 import { getFromObj } from '../../utils/helpers';
 
 export type InputProps = {
@@ -23,12 +23,15 @@ export type InputProps = {
 class Input extends Block {
   constructor(props: InputProps) {
     super(props);
+
+    store.on(StoreEvents.Updated, () => {
+      if (this?.props?.path?.length > 0) {
+        this.props.value = getFromObj(this.props, this.props.path);
+      }
+    });
   }
 
   render() {
-    if (this?.props?.path?.length > 0) {
-      this.props.value = getFromObj(this.props, this.props.path);
-    }
     const str = this.compile(inputTmp, this.props);
     return str;
   }
