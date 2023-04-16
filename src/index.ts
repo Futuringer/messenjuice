@@ -10,6 +10,7 @@ import buttonTmp from './elements/button/buttonTmp';
 import formTmp from './elements/form/formTmp';
 import inputTmp from './elements/input/inputTmp';
 import { router } from './utils/router';
+import authController from './controllers/authController';
 
 Handlebars.registerPartial('errorBlock', errorBlockTmp);
 Handlebars.registerPartial('button', buttonTmp);
@@ -21,5 +22,28 @@ router
   .use('/settings', ProfilePageComponent)
   .use('/messenger', ChatPageComponent)
   .use('/serverError', ServerErrorPageComponent)
-  .use('/clientError', ClientErrorPageComponent)
-  .start();
+  .use('/clientError', ClientErrorPageComponent);
+//   .start();
+
+// if (window.location.pathname === '/settings') {
+//   authController.fetchUser();
+// }
+
+window.addEventListener('DOMContentLoaded', async () => {
+  if (window.location.pathname !== '/' && window.location.pathname !== '/sign-up') {
+    try {
+      await authController.fetchUser();
+
+      router.start();
+
+      // if (!isProtectedRoute) {
+      //   Router.go(Routes.Profile);
+      // }
+    } catch (e) {
+      router.start();
+      router.go('/');
+    }
+  } else {
+    router.start();
+  }
+});

@@ -13,6 +13,8 @@ class AuthController {
     this.api
       .signup(data)
       .then(() => {
+        console.log('data', data);
+        store.set('user.data', data);
         router.go('/settings');
       })
       .catch(e => store.set('registrationFormData.errorText', e.reason));
@@ -26,7 +28,13 @@ class AuthController {
       await this.fetchUser();
     } catch (err) {
       // store.set('user.hasError', true);
-      store.set('loginFormData.errorText', err.reason);
+      // если ошибка логина в том, что мы уже в сети - редирект
+      // TODO проверить уникальность статус кода для этого случая и если да то перепривязаться на него
+      if (err.reason === 'User already in system') {
+        router.go('/settings');
+      } else {
+        store.set('loginFormData.errorText', err.reason);
+      }
     }
   }
 
@@ -41,17 +49,18 @@ class AuthController {
   }
 
   // async
-  fetchUser() {
+  async fetchUser() {
     store.set('user.isLoading', true);
     // await
-    this.api
+    await this.api
       .getUser()
       .then(user => {
         store.set('user.data', user);
       })
-      .catch(() => {
-        store.set('user.hasError', true);
-      })
+      // .catch(() => {
+      //   store.set('user.hasError', true);
+      //   throw new Error('11');
+      // })
       .finally(() => {
         setTimeout(() => store.set('user.isLoading', false), 1000);
       });

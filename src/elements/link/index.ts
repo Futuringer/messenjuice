@@ -14,14 +14,10 @@ export class BaseLink extends Block {
       ...props,
       events: {
         click: () => {
-          this.navigate();
+          this.props.router.go(this.props.descriptionLink);
         },
       },
     });
-  }
-
-  navigate() {
-    this.props.router.go(this.props.descriptionLink);
   }
 
   render() {
