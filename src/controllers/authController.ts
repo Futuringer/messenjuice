@@ -1,5 +1,6 @@
-import store, { SigninData, SignupData } from '../utils/store';
-import AuthAPI from '../api/authApi';
+import { ROUTES } from '..';
+import store, { initialState } from '../utils/store';
+import AuthAPI, { SigninData, SignupData } from '../api/authApi';
 import { router } from '../utils/router';
 
 class AuthController {
@@ -13,27 +14,26 @@ class AuthController {
     this.api
       .signup(data)
       .then(() => {
-        console.log('data', data);
         store.set('user.data', data);
-        router.go('/settings');
+        router.go(ROUTES.MESSENGER);
       })
-      .catch(e => store.set('registrationFormData.errorText', e.reason));
+      .catch(e => store.set('currentFormData.errorText', e.reason));
   }
 
   async signin(data: SigninData) {
     try {
       console.log('signin');
       await this.api.signin(data).then(res => console.log(res));
-
       await this.fetchUser();
+      router.go(ROUTES.MESSENGER);
     } catch (err) {
       // store.set('user.hasError', true);
       // если ошибка логина в том, что мы уже в сети - редирект
-      // TODO проверить уникальность статус кода для этого случая и если да то перепривязаться на него
       if (err.reason === 'User already in system') {
-        router.go('/settings');
+        await this.fetchUser();
+        router.go(ROUTES.MESSENGER);
       } else {
-        store.set('loginFormData.errorText', err.reason);
+        store.set('currentFormData.errorText', err.reason);
       }
     }
   }
@@ -42,8 +42,8 @@ class AuthController {
     this.api
       .logout()
       .then(() => {
-        store.set('user', null);
-        router.go('/');
+        store.set('user', initialState.user);
+        router.go(ROUTES.LOGIN);
       })
       .catch(console.log);
   }
@@ -57,10 +57,6 @@ class AuthController {
       .then(user => {
         store.set('user.data', user);
       })
-      // .catch(() => {
-      //   store.set('user.hasError', true);
-      //   throw new Error('11');
-      // })
       .finally(() => {
         setTimeout(() => store.set('user.isLoading', false), 1000);
       });
