@@ -58,10 +58,10 @@ const loginForm = new Form({
 
 class LoginPageComponent extends Block {
   constructor(props?: LoginPageProps) {
-    super({ img: logo, form: loginForm, ...props });
+    super({ ...props, img: logo, form: loginForm });
 
     store.on(StoreEvents.Updated, () => {
-      (this.children.form as Block).props.errorText = store.getState().loginFormData.errorText;
+      (this.children.form as Block).props.errorText = store.getState().currentFormData.errorText;
     });
   }
 
