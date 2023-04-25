@@ -4,7 +4,7 @@ const messageTmp = `
     {{#if image}}
     <img src={{image}} alt="" class="message__image">
     {{/if}}
-    {{{content}}}
+    {{content}}
     <div class="message__time">{{time}}</div>
   </div>
 {{else}}
@@ -12,7 +12,7 @@ const messageTmp = `
     {{#if image}}
     <img src={{image}} alt="" class="message__image">
     {{/if}}
-    {{{content}}}
+    {{content}}
     <div class="message__time">{{time}}</div>
   </div>
 {{/if}}

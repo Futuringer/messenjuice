@@ -84,11 +84,6 @@ const profileForm = new Form({
   singleColumn: false,
   buttons: [profileChangeInfoButton, profileChangePasswordButton, profileCancelButton, profileSignOutButton],
   inputs: [...profileInputs],
-  events: {
-    submit: (e: HTMLFormElement) => {
-      handleSubmitForm(e, 'profileForm', () => console.log(12));
-    },
-  },
 });
 
 const passwordsChangeInfoButton = new Button({
@@ -223,7 +218,6 @@ class ProfilePageComponent extends Block {
 
   init(): void {
     this.props.avatar = `https://ya-praktikum.tech/api/v2/resources/${this.props.data.avatar}`;
-    console.log('this.props', this.props);
   }
 
   render() {

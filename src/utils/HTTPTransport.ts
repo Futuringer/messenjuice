@@ -40,7 +40,6 @@ class HTTPTransport {
   }
 
   get<Response>(url: string, options?: OptionsType) {
-    console.log(options);
     return this.request<Response>(
       url,
       { ...options, data: queryStringify(options?.data), method: METHODS.GET },

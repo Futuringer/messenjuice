@@ -23,7 +23,7 @@ class AuthController {
   async signin(data: SigninData) {
     try {
       console.log('signin');
-      await this.api.signin(data).then(res => console.log(res));
+      await this.api.signin(data);
       await this.fetchUser();
       router.go(ROUTES.MESSENGER);
     } catch (err) {

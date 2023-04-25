@@ -94,7 +94,6 @@ class Block {
   init() {}
 
   dispatchComponentDidMount() {
-    console.log('dispatchComponentDidMount');
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
@@ -119,7 +118,6 @@ class Block {
   }
 
   componentDidUpdate(oldProps: P, newProps: P) {
-    // console.log('oldProps, newProps', oldProps, newProps, isEqual(oldProps, newProps));
     return !isEqual(oldProps, newProps);
   }
 
