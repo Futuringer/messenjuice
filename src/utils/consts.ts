@@ -12,12 +12,12 @@ export const validationParams = {
     { regex: /[A-Z]/, message: 'Field must contain at least one capital letter' },
     { regex: /[0-9]/, message: 'Field must contain at least one digit' },
   ],
-  old_password: [
+  oldPassword: [
     { regex: /^.{8,40}$/, message: 'Field must contain from 8 to 40 characters' },
     { regex: /[A-Z]/, message: 'Field must contain at least one capital letter' },
     { regex: /[0-9]/, message: 'Field must contain at least one digit' },
   ],
-  new_password: [
+  newPassword: [
     { regex: /^.{8,40}$/, message: 'Field must contain from 8 to 40 characters' },
     { regex: /[A-Z]/, message: 'Field must contain at least one capital letter' },
     { regex: /[0-9]/, message: 'Field must contain at least one digit' },
@@ -41,13 +41,14 @@ export const validationParams = {
     { regex: /^[a-zA-Zа-яёА-ЯЁ0-9-]*$/, message: 'Invalid characters' },
     { regex: /^[A-Z].+$/, message: 'Field must start with capital letter' },
   ],
+  // newChatName: [],
 };
 
 export type InputsCollectionType = keyof typeof validationParams;
 
 type InputFormsConfigType = Array<
   Omit<InputProps, 'name'> &
-    Pick<InputWithLabelProps, 'label'> & { name: keyof typeof validationParams; value?: string }
+    Pick<InputWithLabelProps, 'label'> & { name: keyof typeof validationParams; value?: string; disabled?: boolean }
 >;
 
 export const loginInputsConfig: InputFormsConfigType = [
@@ -111,6 +112,74 @@ export const profileInputsConfig: InputFormsConfigType = [
     type: 'text',
     label: 'Email',
     path: 'user.data.email',
+    disabled: true,
+  },
+  {
+    name: 'login',
+    placeholder: 'Enter your login',
+    type: 'text',
+    label: 'Login',
+    path: 'user.data.login',
+    disabled: true,
+  },
+  {
+    name: 'first_name',
+    placeholder: 'Enter your first name',
+    type: 'text',
+    label: 'First Name',
+    path: 'user.data.first_name',
+    disabled: true,
+  },
+  {
+    name: 'second_name',
+    placeholder: 'Enter your last name',
+    type: 'text',
+    label: 'Second Name',
+    path: 'user.data.second_name',
+    disabled: true,
+  },
+  {
+    name: 'display_name',
+    placeholder: 'Enter name to show',
+    type: 'text',
+    label: 'Name to show',
+    path: 'user.data.display_name',
+    disabled: true,
+  },
+  {
+    name: 'phone',
+    placeholder: 'Enter your phone',
+    type: 'text',
+    label: 'Phone',
+    path: 'user.data.phone',
+    disabled: true,
+  },
+];
+
+export const passwordsInputsConfig: InputFormsConfigType = [
+  {
+    name: 'oldPassword',
+    placeholder: 'Enter old password',
+    type: 'password',
+    label: 'OldPassword',
+    path: 'user.data.oldPassword',
+  },
+  {
+    name: 'newPassword',
+    placeholder: 'Enter new password',
+    type: 'password',
+    label: 'NewPassword',
+    path: 'user.data.newPassword',
+  },
+];
+
+export const infoInputsConfig: InputFormsConfigType = [
+  {
+    name: 'email',
+    placeholder: 'Enter your email',
+    type: 'text',
+    label: 'Email',
+    path: 'user.data.email',
   },
   {
     name: 'login',
@@ -146,19 +215,5 @@ export const profileInputsConfig: InputFormsConfigType = [
     type: 'text',
     label: 'Phone',
     path: 'user.data.phone',
-  },
-  {
-    name: 'old_password',
-    placeholder: 'Enter old password',
-    type: 'text',
-    label: 'Old Password',
-    path: 'user.data.old_password',
-  },
-  {
-    name: 'new_password',
-    placeholder: 'Enter new password',
-    type: 'text',
-    label: 'New Password',
-    path: 'user.data.new_password',
   },
 ];

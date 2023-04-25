@@ -1,6 +1,7 @@
 import { isEqual } from './helpers';
 import Block from './block';
 import store from './store';
+import chatsController from '../controllers/chatsController';
 
 function render(query: string, block: Block) {
   const root = document.querySelector(query);
@@ -29,8 +30,8 @@ class Route {
       this.block = null;
     }
 
-    store.set('loginFormData.errorText', '');
-    store.set('registrationFormData.errorText', '');
+    store.set('currentFormData.errorText', '');
+    store.set('currentFormData.successText', '');
   }
 
   match(pathname: string) {
@@ -112,6 +113,15 @@ class Router {
   }
 }
 
-const router = new Router('#root');
+class MyRouter extends Router {
+  go(pathname: string): void {
+    super.go(pathname);
+    if (pathname === '/messenger') {
+      chatsController.getChats({});
+    }
+  }
+}
+
+const router = new MyRouter('#root');
 
 export { Route, Router, router };

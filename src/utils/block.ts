@@ -155,7 +155,6 @@ class Block {
 
   protected compile(template: string, props: any) {
     const propsAndStubs = { ...props };
-
     Object.entries(this.children).forEach(([key, child]) => {
       if (Array.isArray(child)) {
         propsAndStubs[key] = child.map(item => `<div data-id="${item.id}"></div>`);

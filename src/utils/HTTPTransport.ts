@@ -8,6 +8,7 @@ enum METHODS {
 type OptionsType = {
   data?: any;
   timeout?: number;
+  headers?: Record<string, string>;
 };
 
 function queryStringify(data: Record<string, any>) {
@@ -39,6 +40,7 @@ class HTTPTransport {
   }
 
   get<Response>(url: string, options?: OptionsType) {
+    console.log(options);
     return this.request<Response>(
       url,
       { ...options, data: queryStringify(options?.data), method: METHODS.GET },
@@ -63,7 +65,7 @@ class HTTPTransport {
     options: OptionsType & { method: METHODS } = { method: METHODS.GET },
     timeout = 5000,
   ): Promise<Response> {
-    const { method, data } = options;
+    const { method, data, headers } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -93,12 +95,23 @@ class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
-      xhr.setRequestHeader('Content-Type', 'application/json');
+      const isFormData = data instanceof FormData;
+
+      if (!isFormData) {
+        xhr.setRequestHeader('Content-Type', 'application/json');
+      }
+      if (headers) {
+        Object.keys(headers).forEach(key => {
+          xhr.setRequestHeader(key, headers[key]);
+        });
+      }
 
       xhr.withCredentials = true;
       xhr.responseType = 'json';
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (isFormData) {
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }

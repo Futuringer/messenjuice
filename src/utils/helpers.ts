@@ -1,11 +1,13 @@
+import { ChatType } from 'src/api/chatsApi';
 import { validationParams, InputsCollectionType } from './consts';
+import store, { ChatMessageType } from './store';
 
 export const validateInput = (name: InputsCollectionType) => {
   const input = document.getElementsByName(name)[0] as HTMLInputElement;
   const { value } = input;
 
   // тут находм первую встретившуюся ошику, если хоть один регекс не пройден возвращаем ошибку
-  const error = validationParams[name as keyof typeof validationParams].find(item => !item.regex.test(value));
+  const error = validationParams[name as keyof typeof validationParams].find(item => !item?.regex.test(value));
   const errorMessage = error?.message;
   const result = !error;
 
@@ -47,6 +49,9 @@ export const gatherAllInputs = (element: HTMLElement) => {
 
 export const handleSubmitForm = (e: HTMLFormElement, formName: string, cb: (value: any) => void) => {
   e.preventDefault();
+  store.set('currentFormData.errorText', '');
+  store.set('currentFormData.successText', '');
+
   const form = document.forms.namedItem(formName);
   if (form) {
     const inputs = gatherAllInputs(form);
@@ -108,7 +113,7 @@ export function set(object: Indexed | unknown, path: string, value: unknown): In
   return merge(object as Indexed, result);
 }
 
-export const isEqual = function (x: any, y: any) {
+export const isEqual = (x: any, y: any) => {
   if (x === y) {
     return true;
   }
@@ -136,4 +141,29 @@ export const getFromObj = (initialObject: Record<string, any>, initialPath: stri
     return setter(object?.[path.splice(0, 1)![0]], path);
   };
   return setter(initialObject, array);
+};
+
+// трансформирует дату
+export const transformTime = (stringDate: string) => {
+  const today = new Date();
+  const date = new Date(stringDate);
+  if (today.getDate() === date.getDate()) {
+    return `${date.getHours()}:${date.getMinutes() <= 9 ? `0${date.getMinutes()}` : date.getMinutes()}`;
+  }
+  return date.toISOString().substring(5, 10).replace('-', '/');
+};
+export const sortMessagesInChat = (cards: ChatType[]) => {
+  const cardsWithSortedMessages = cards?.forEach(card => {
+    return card.messages.sort((m1, m2) => {
+      if (new Date((m1 as ChatMessageType).time) > new Date((m2 as ChatMessageType).time)) {
+        return -1;
+      }
+      if (new Date((m2 as ChatMessageType).time) > new Date((m1 as ChatMessageType).time)) {
+        return 1;
+      }
+
+      return 0;
+    });
+  });
+  return cardsWithSortedMessages;
 };
