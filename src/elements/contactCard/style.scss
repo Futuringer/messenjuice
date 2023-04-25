@@ -22,9 +22,11 @@
   }
 
   &__avatar {
+    object-fit: cover;
     margin-right: 12px;
     width: 42px;
     height: 42px;
+    border-radius: 50%;
   }
 
   &__textContainer {
@@ -40,6 +42,8 @@
     flex-direction: column;
     display: flex;
     margin-left: auto;
+    margin-right: 10px;
+    width: 40px;
   }
 
   &__name {
@@ -78,5 +82,11 @@
     text-align: center;
     background-color: v.$baseNeutral;
     color: v.$neutralDark;
+  }
+
+  &__deleteCard {
+    width: 30px !important;
+    height: 30px !important;
+    background-color: v.$activeError;
   }
 }
