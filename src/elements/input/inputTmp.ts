@@ -7,7 +7,12 @@ const inputTmp = `
     name={{name}}
     type={{type}}
     value="{{value}}"
+    {{#if disabled}}
+    disabled
+    placeholder="--"
+    {{else}}
     placeholder="{{placeholder}}"
+    {{/if}}
   />
 `;
 

@@ -1,36 +1,26 @@
+import { ChatType } from 'src/api/chatsApi';
 import Block from './block';
 import EventBus from './eventBus';
 import { set } from './helpers';
-
-export interface SignupData {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-}
-
-export interface SigninData {
-  login: string;
-  password: string;
-}
-
-export interface User {
-  id: number;
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-  phone: string;
-  avatar: string;
-}
+import { User } from '../api/authApi';
 
 export enum StoreEvents {
   Updated = 'Updated',
-  // RESET_FORM = 'ResetForms',
 }
+
+export type ChatMessageType = {
+  content: string;
+  time: string;
+  isOwn: boolean;
+};
+
+export type ChatUserType = {
+  id: number;
+  display_name: string;
+  avatar: string;
+  role: string;
+  canBeDeleted?: boolean;
+};
 
 interface State {
   user: {
@@ -38,22 +28,27 @@ interface State {
     hasError?: boolean;
     isLoading?: boolean;
   };
-  loginFormData: {
+  currentFormData: {
     errorText: string;
+    successText: string;
   };
-  registrationFormData: {
-    errorText: string;
-  };
+  chats: {
+    cards: Array<ChatType>;
+  } | null;
+  activeProfileForm?: { value: 'profile' | 'changeInfo' | 'changePassword' };
+  currentChat: { value: number; users: ChatUserType[] } | null;
 }
 
-const initialState: State = {
+export const initialState: State = {
   user: {
     data: null,
     isLoading: true,
     hasError: false,
   },
-  loginFormData: { errorText: '' },
-  registrationFormData: { errorText: '' },
+  currentFormData: { errorText: '', successText: '' },
+  activeProfileForm: { value: 'profile' },
+  chats: null,
+  currentChat: null,
 };
 
 class Store extends EventBus {

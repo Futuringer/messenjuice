@@ -18,6 +18,7 @@ export type InputProps = {
     invalid?: (value: Event) => void;
     input?: (value: Event) => void;
   };
+  disabled?: boolean;
 };
 
 class Input extends Block {
