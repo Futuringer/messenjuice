@@ -6,39 +6,26 @@ import ContactCard from '../../elements/contactCard';
 import chatTmp from './chatTmp';
 import Block from '../../utils/block';
 import CardsBlock from '../../elements/cardsBlock';
-import { mockCards, mockMessages } from './utils';
 import UserBadge from '../../elements/userBadge';
-import logo from '../../../static/imgs/avatarPlaceholder.png';
 import arrow from '../../../static/imgs/icons/arrow.svg';
 import dots from '../../../static/imgs/icons/dots.svg';
 import MessageForm from '../../elements/messageForm';
+import { handleSettingsButtonClick, handleSendMessage } from './chat';
+import store, { StoreEvents, withStore } from '../../utils/store';
+import ChatUserstWithState from '../../elements/chatUsers';
 
 type ChatProps = {
   optionsButton: Button;
+  settingsButton: Button;
   userBadge: UserBadge;
-  searchInput: Input;
+  searchInput: typeof Input;
   contacts: CardsBlock;
   messageForm: MessageForm;
   messages: Message[];
 };
+const cardsBlock = new CardsBlock({});
 
-const cards = mockCards.map(item => {
-  return new ContactCard(item);
-});
-
-const messages = mockMessages.map(item => {
-  return new Message(item);
-});
-
-const cardsBlock = new CardsBlock({
-  cards,
-});
-
-const userBadge = new UserBadge({
-  avatar: logo,
-  name: 'Vlad',
-});
-
+const chatUsers = new ChatUserstWithState({});
 const searchInput = new Input({
   name: 'search',
   placeholder: 'search...',
@@ -51,7 +38,16 @@ const messageSubmitButton = new Button({
   icon: arrow,
   type: 'submit',
   className: 'chat__submitButton',
-  disabled: true,
+});
+
+const settingsButton = new Button({
+  variant: 'circle',
+  icon: dots,
+  type: 'submit',
+  className: 'chat__submitButton',
+  events: {
+    click: handleSettingsButtonClick,
+  },
 });
 
 const messageOptionsButton = new Button({
@@ -83,21 +79,51 @@ const messageForm = new MessageForm({
     submit: e => {
       e.preventDefault();
       const input = document.getElementsByName('message')[0] as HTMLInputElement;
-      console.log(input.value);
+      handleSendMessage(input.value);
     },
   },
 });
 
 class ChatPageComponent extends Block {
-  constructor(props?: ChatProps) {
+  constructor(props: ChatProps) {
     super({
+      ...props,
       optionsButton: messageOptionsButton,
-      userBadge,
+      chatUsers,
       searchInput,
       contacts: cardsBlock,
       messageForm,
-      messages,
-      ...props,
+      messages: [],
+      settingsButton,
+    });
+    store.on(StoreEvents.Updated, () => {
+      this.props.showInput = Boolean(store.getState().currentChat?.value);
+
+      const { currentChat } = store.getState();
+      const currentMessages = store.getState().chats?.cards.find(item => {
+        return item.id === currentChat?.value;
+      })?.messages;
+
+      const currentMessagesComps = currentMessages?.map(item => {
+        return new Message(item);
+      });
+
+      if (currentMessagesComps) {
+        this.props.messages = currentMessagesComps;
+        this.children.messages = currentMessagesComps;
+      } else {
+        this.props.messages = [];
+        this.children.messages = [];
+      }
+
+      if (store.getState().chats?.cards) {
+        (this.children.contacts as Block).children.cards = store.getState().chats?.cards.map(item => {
+          return new ContactCard(item);
+        }) as ContactCard[];
+        (this.children.contacts as Block).props.cards = store.getState().chats?.cards.map(item => {
+          return new ContactCard(item);
+        });
+      }
     });
   }
 
@@ -107,4 +133,7 @@ class ChatPageComponent extends Block {
   }
 }
 
-export default ChatPageComponent;
+const withChats = withStore(state => ({ ...state.currentChat, ...state.chats?.cards }));
+
+const ChatPageWithState = withChats(ChatPageComponent);
+export default ChatPageWithState;
