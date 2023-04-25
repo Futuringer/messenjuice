@@ -4,18 +4,18 @@ import messengeTmp from './messageTmp';
 type ImageMessageProps = {
   image: string;
   time: string;
-  isMyMessage: boolean;
+  isOwn: boolean;
 };
 
 type TextMessageprops = {
-  text: string;
+  content: string;
   time: string;
-  isMyMessage: boolean;
+  isOwn: boolean;
 };
 
 export type MessageProps = ImageMessageProps | TextMessageprops;
 
-class Message extends Block<MessageProps> {
+class Message extends Block {
   constructor(props: MessageProps) {
     super(props);
   }

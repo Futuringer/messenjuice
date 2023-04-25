@@ -1,14 +1,28 @@
 import Block from '../../utils/block';
 import userBadgeTmp from './userBadgeTmp';
+import { ChatUserType } from '../../utils/store';
+import Button from '../button';
+import cross from '../../../static/imgs/icons/cross.svg';
+import { handleDeleteUserFromChat } from './userBadge';
 
-type UserBadgeProps = {
-  avatar: string;
-  name: string;
-};
+type UserBadgeProps = ChatUserType;
 
-class UserBadge extends Block<UserBadgeProps> {
+class UserBadge extends Block {
   constructor(props: UserBadgeProps) {
-    super(props);
+    super({
+      ...props,
+      deleteButton: new Button({
+        className: 'userBadge__deleteUser',
+        type: 'button',
+        variant: 'circle',
+        icon: cross,
+        events: {
+          click: () => {
+            handleDeleteUserFromChat(props.id);
+          },
+        },
+      }),
+    });
   }
 
   render() {
