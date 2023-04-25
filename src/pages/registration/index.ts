@@ -1,4 +1,4 @@
-import { validateFormInput, setDefaultLabelState, handleInvalid, handleSubmitForm } from '../../utils/helpers';
+import { validateFormInput, setDefaultLabelState, handleInvalid } from '../../utils/helpers';
 import { registrationInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';
@@ -61,7 +61,7 @@ class RegistrationPageComponent extends Block {
     super({ img: logo, form: registrationForm, ...props });
 
     store.on(StoreEvents.Updated, () => {
-      (this.children.form as Block).props.errorText = store.getState().registrationFormData.errorText;
+      (this.children.form as Block).props.errorText = store.getState().currentFormData.errorText;
     });
   }
 
