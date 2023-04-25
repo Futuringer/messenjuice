@@ -11,37 +11,41 @@ import formTmp from './elements/form/formTmp';
 import inputTmp from './elements/input/inputTmp';
 import { router } from './utils/router';
 import authController from './controllers/authController';
+import chatsController from './controllers/chatsController';
+import Block from './utils/block';
+
+export const ROUTES = {
+  LOGIN: '/',
+  REGISTRATION: '/sign-up',
+  PROFILE: '/settings',
+  MESSENGER: '/messenger',
+  SERVERERROR: '/serverError',
+  CLIENTERROR: '/clientError',
+};
 
 Handlebars.registerPartial('errorBlock', errorBlockTmp);
 Handlebars.registerPartial('button', buttonTmp);
 Handlebars.registerPartial('input', inputTmp);
 Handlebars.registerPartial('form', formTmp);
 router
-  .use('/', LoginPageComponent)
-  .use('/sign-up', RegistrationPageComponent)
-  .use('/settings', ProfilePageComponent)
-  .use('/messenger', ChatPageComponent)
-  .use('/serverError', ServerErrorPageComponent)
-  .use('/clientError', ClientErrorPageComponent);
-//   .start();
-
-// if (window.location.pathname === '/settings') {
-//   authController.fetchUser();
-// }
+  .use(ROUTES.LOGIN, LoginPageComponent as typeof Block)
+  .use(ROUTES.REGISTRATION, RegistrationPageComponent as typeof Block)
+  .use(ROUTES.PROFILE, ProfilePageComponent)
+  .use(ROUTES.MESSENGER, ChatPageComponent)
+  .use(ROUTES.SERVERERROR, ServerErrorPageComponent as typeof Block)
+  .use(ROUTES.CLIENTERROR, ClientErrorPageComponent as typeof Block);
 
 window.addEventListener('DOMContentLoaded', async () => {
-  if (window.location.pathname !== '/' && window.location.pathname !== '/sign-up') {
+  if (window.location.pathname === ROUTES.MESSENGER) {
+    chatsController.getChats({});
+  }
+  if (window.location.pathname !== ROUTES.LOGIN && window.location.pathname !== ROUTES.REGISTRATION) {
     try {
       await authController.fetchUser();
-
       router.start();
-
-      // if (!isProtectedRoute) {
-      //   Router.go(Routes.Profile);
-      // }
     } catch (e) {
       router.start();
-      router.go('/');
+      router.go(ROUTES.LOGIN);
     }
   } else {
     router.start();
