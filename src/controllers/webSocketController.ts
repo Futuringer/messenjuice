@@ -1,6 +1,5 @@
 import store from '../utils/store';
 import WebSocketAPI, { WebSocketConnectPayload, ChatMessagePaload } from '../api/webSocketApi';
-
 import { transformGetChatsResponse } from './transformers/webSocketTransformer';
 
 class WebSocketController {
@@ -25,6 +24,7 @@ class WebSocketController {
       setInterval(() => {
         api.ping();
       }, 3000);
+      api.getOld('0');
     });
 
     socket.addEventListener('message', e => {
