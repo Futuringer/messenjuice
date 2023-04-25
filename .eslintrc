@@ -45,6 +45,7 @@
     "no-param-reassign": "off",
     "class-methods-use-this": "off",
     "no-console": "off",
+    "import/no-cycle": "off"
   },
   "parserOptions": {
     "sourceType": "module",
