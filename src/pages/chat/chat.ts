@@ -1,4 +1,4 @@
-import { ROUTES } from '../..';
+import { ROUTES } from '../../utils/consts';
 import { router } from '../../utils/router';
 import webSocketController from '../../controllers/webSocketController';
 import store from '../../utils/store';

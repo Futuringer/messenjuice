@@ -1,5 +1,5 @@
 import { validateFormInput, setDefaultLabelState, handleInvalid } from '../../utils/helpers';
-import { registrationInputsConfig } from '../../utils/consts';
+import { registrationInputsConfig, ROUTES } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';
 import Input from '../../elements/input';
@@ -39,7 +39,7 @@ const signUpButton = new Button({
 
 const loginLink = new Link({
   descriptionLinkText: 'Log in',
-  descriptionLink: '/',
+  descriptionLink: ROUTES.LOGIN,
   linkClass: 'form__description-link',
 });
 

@@ -2,6 +2,7 @@ import { isEqual } from './helpers';
 import Block from './block';
 import store from './store';
 import chatsController from '../controllers/chatsController';
+import { ROUTES } from './consts';
 
 function render(query: string, block: Block) {
   const root = document.querySelector(query);
@@ -52,7 +53,7 @@ class Route {
 class Router {
   private static instance: Router;
 
-  private routes: Route[] = [];
+  routes: Route[] = [];
 
   private history: History = window.history;
 
@@ -116,9 +117,13 @@ class Router {
 class MyRouter extends Router {
   go(pathname: string): void {
     super.go(pathname);
-    if (pathname === '/messenger') {
+    if (pathname === ROUTES.MESSENGER) {
       chatsController.getChats({});
     }
+  }
+
+  getRoute(pathname: string): Route {
+    return this.routes.find(route => route.match(pathname)) || this.getRoute(ROUTES.CLIENTERROR);
   }
 }
 

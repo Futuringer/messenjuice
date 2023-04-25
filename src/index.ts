@@ -13,15 +13,7 @@ import { router } from './utils/router';
 import authController from './controllers/authController';
 import chatsController from './controllers/chatsController';
 import Block from './utils/block';
-
-export const ROUTES = {
-  LOGIN: '/',
-  REGISTRATION: '/sign-up',
-  PROFILE: '/settings',
-  MESSENGER: '/messenger',
-  SERVERERROR: '/serverError',
-  CLIENTERROR: '/clientError',
-};
+import { ROUTES } from './utils/consts';
 
 Handlebars.registerPartial('errorBlock', errorBlockTmp);
 Handlebars.registerPartial('button', buttonTmp);

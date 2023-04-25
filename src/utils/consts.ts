@@ -1,6 +1,15 @@
 import { InputProps } from 'src/elements/input';
 import { InputWithLabelProps } from 'src/elements/inputWithLabel';
 
+export const ROUTES = {
+  LOGIN: '/',
+  REGISTRATION: '/sign-up',
+  PROFILE: '/settings',
+  MESSENGER: '/messenger',
+  SERVERERROR: '/serverError',
+  CLIENTERROR: '/clientError',
+};
+
 export const validationParams = {
   login: [
     { regex: /^[a-zA-Z0-9_-]*$/, message: 'Invalid characters' },

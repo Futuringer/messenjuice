@@ -1,7 +1,7 @@
 import { handleSubmitForm } from '../../utils/helpers';
 import userController from '../../controllers/userController';
 import authController from '../../controllers/authController';
-import { ROUTES } from '../../index';
+import { ROUTES } from '../../utils/consts';
 import { router } from '../../utils/router';
 import { UpdateProfileData, UpdatePasswordData } from '../../api/userApi';
 

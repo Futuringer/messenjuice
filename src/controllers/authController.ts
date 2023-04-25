@@ -1,4 +1,4 @@
-import { ROUTES } from '..';
+import { ROUTES } from '../utils/consts';
 import store, { initialState } from '../utils/store';
 import AuthAPI, { SigninData, SignupData } from '../api/authApi';
 import { router } from '../utils/router';
