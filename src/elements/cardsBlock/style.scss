@@ -1,6 +1,10 @@
 @use './../../styles/variables/colors.scss' as v;
 
 .cardsBlock {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 110px);
+
   &__container {
     flex-grow: 1;
     display: flex;
@@ -10,5 +14,20 @@
     background-color: v.$baseNeutral;
     border-radius: 10px;
     overflow-y: auto;
+  }
+
+  &__addChatBlock {
+    padding: 10px;
+    background-color: v.$neutralDark;
+    border-radius: 10px;
+  }
+
+  &__newChatInput {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    outline: none;
+    border: none;
   }
 }
