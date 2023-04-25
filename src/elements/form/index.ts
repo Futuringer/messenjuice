@@ -2,7 +2,6 @@ import Block from '../../utils/block';
 import formTmp from './formTmp';
 import Button from '../button';
 import InputWithLabel from '../inputWithLabel';
-// import Link from '../link';
 
 type FormProps = {
   formName: string;
@@ -11,6 +10,7 @@ type FormProps = {
   descriptionText?: string;
   descriptionLink?: any;
   errorText?: string;
+  successText?: string;
   singleColumn?: boolean;
   inputs?: InputWithLabel[];
   events?: {

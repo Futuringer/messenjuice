@@ -54,4 +54,22 @@
     display: grid;
     gap: 10px;
   }
+
+  &__status-text {
+    width: calc(200% + 40px);
+    text-align: center;
+    white-space: nowrap;
+    font-size: 17px;
+    line-height: 20px;
+    margin-bottom: -30px;
+    margin-top: 0;
+  }
+
+  &__success-text {
+    color: v.$activeSuccess;
+  }
+
+  &__error-text {
+    color: v.$activeError;
+  }
 }
