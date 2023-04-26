@@ -38,6 +38,7 @@ const messageSubmitButton = new Button({
   icon: arrow,
   type: 'submit',
   className: 'chat__submitButton',
+  disabled: true,
 });
 
 const settingsButton = new Button({
