@@ -8,7 +8,7 @@ type FormProps = {
   formText: string;
   buttons: Button[];
   descriptionText?: string;
-  descriptionLink?: any;
+  descriptionLink?: unknown;
   errorText?: string;
   successText?: string;
   singleColumn?: boolean;

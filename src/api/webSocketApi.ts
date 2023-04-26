@@ -12,7 +12,7 @@ export type WSMessageData = {
 export type ChatMessagePaload = {
   chat_id: number;
   content: string;
-  file: any;
+  file: File;
   id: number;
   is_read: boolean;
   time: string;

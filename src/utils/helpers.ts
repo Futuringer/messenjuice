@@ -47,7 +47,7 @@ export const gatherAllInputs = (element: HTMLElement) => {
   return Array.from(inputs).map(item => item.name);
 };
 
-export const handleSubmitForm = (e: HTMLFormElement, formName: string, cb: (value: any) => void) => {
+export const handleSubmitForm = (e: HTMLFormElement, formName: string, cb: (value: unknown) => void) => {
   e.preventDefault();
   store.set('currentFormData.errorText', '');
   store.set('currentFormData.successText', '');

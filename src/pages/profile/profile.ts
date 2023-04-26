@@ -9,10 +9,13 @@ export const handleCancelClick = () => {
   router.go(ROUTES.MESSENGER);
 };
 
-export const handleAvatarChange = (e: any) => {
+export const handleAvatarChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
   const formData = new FormData();
-  formData.append('avatar', e.target.files[0]);
-  userController.changeAvatar(formData);
+  if (target.files) {
+    formData.append('avatar', target.files[0]);
+    userController.changeAvatar(formData);
+  }
 };
 
 export const handleProfileChangeSubmit = (e: HTMLFormElement, formName: string) => {

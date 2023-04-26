@@ -15,7 +15,7 @@ class Block {
 
   _element: HTMLElement | null = null;
 
-  _meta: { props: any };
+  _meta: { props: unknown };
 
   children: Record<string, Block | Block[]>;
 

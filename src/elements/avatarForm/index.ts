@@ -3,7 +3,7 @@ import formTmp from './avatarFormTmp';
 
 type AvatarInputProps = {
   events?: {
-    change?: (value: any) => void;
+    change?: (value: Event) => void;
   };
 };
 
