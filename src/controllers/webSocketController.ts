@@ -28,33 +28,39 @@ class WebSocketController {
     });
 
     socket.addEventListener('message', e => {
-      const res = JSON.parse(e.data);
-      const cards = store.getState().chats?.cards;
+      if (e) {
+        try {
+          const res = JSON.parse(e.data);
+          const cards = store.getState().chats?.cards;
 
-      // получили массив сообщений для всех чатов
-      if (Array.isArray(res as ChatMessagePaload[])) {
-        const changedCard = cards?.find(item => {
-          return item.id === res[0]?.chat_id;
-        });
-        const newCard = { ...changedCard, messages: transformGetChatsResponse(res) };
-        const newCards = cards?.map(item => {
-          return item.id === newCard.id ? newCard : item;
-        });
-        store.set('chats.cards', newCards);
+          // получили массив сообщений для всех чатов
+          if (Array.isArray(res as ChatMessagePaload[])) {
+            const changedCard = cards?.find(item => {
+              return item.id === res[0]?.chat_id;
+            });
+            const newCard = { ...changedCard, messages: transformGetChatsResponse(res) };
+            const newCards = cards?.map(item => {
+              return item.id === newCard.id ? newCard : item;
+            });
+            store.set('chats.cards', newCards);
 
-        // получили сообщение по сокету для конкретного чата
-      } else if (res.type === 'message') {
-        const changedCard = cards?.find(item => {
-          return item.id === data.wsParams.chatId;
-        });
-        const newCard = {
-          ...changedCard,
-          messages: [transformGetChatsResponse(res), ...(changedCard?.messages || [])],
-        };
-        const newCards = cards?.map(item => {
-          return item.id === newCard.id ? newCard : item;
-        });
-        store.set('chats.cards', newCards);
+            // получили сообщение по сокету для конкретного чата
+          } else if (res.type === 'message') {
+            const changedCard = cards?.find(item => {
+              return item.id === data.wsParams.chatId;
+            });
+            const newCard = {
+              ...changedCard,
+              messages: [transformGetChatsResponse(res), ...(changedCard?.messages || [])],
+            };
+            const newCards = cards?.map(item => {
+              return item.id === newCard.id ? newCard : item;
+            });
+            store.set('chats.cards', newCards);
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
     });
   }
