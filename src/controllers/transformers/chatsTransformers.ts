@@ -33,7 +33,7 @@ export const transformGetChatUsers = (data: UserWithRole[]): ChatUserType[] => {
   return data.map(item => {
     return {
       id: item.id,
-      display_name: item.display_name || 'default_user',
+      display_name: item.display_name || item.first_name || 'default_user',
       avatar: item.avatar ? `https://ya-praktikum.tech/api/v2/resources/${item.avatar}` : logo,
       role: item.role,
       canBeDeleted: userRole === 'admin' && item.role !== 'admin',
