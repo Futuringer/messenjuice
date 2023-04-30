@@ -10,9 +10,16 @@ const formTmp = `
   {{else}}
     <div class="form__inputs-container form__inputs-container_two-columns">
       {{{inputs}}}
+
+      {{#if errorText}}
+        <div class="form__status-text form__error-text">{{errorText}}</div>
+      {{/if}}
+
+      {{#if successText}}
+        <div class="form__status-text form__success-text">{{successText}}</div>
+      {{/if}}
   </div>
   {{/if}}
-
   <div class="form__buttons-container">
       {{{buttons}}}
   </div>
@@ -20,7 +27,7 @@ const formTmp = `
   {{#if descriptionText}}
     <p class="form__description">
       {{descriptionText}}
-      <a class="form__description-link" href={{descriptionLink}}>{{descriptionLinkText}}</a>
+      {{{descriptionLink}}}
     </p>
   {{/if}}
 </form>

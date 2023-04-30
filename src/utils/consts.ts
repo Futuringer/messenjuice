@@ -1,10 +1,19 @@
 import { InputProps } from 'src/elements/input';
 import { InputWithLabelProps } from 'src/elements/inputWithLabel';
 
+export const ROUTES = {
+  LOGIN: '/',
+  REGISTRATION: '/sign-up',
+  PROFILE: '/settings',
+  MESSENGER: '/messenger',
+  SERVERERROR: '/serverError',
+  CLIENTERROR: '/clientError',
+};
+
 export const validationParams = {
   login: [
     { regex: /^[a-zA-Z0-9_-]*$/, message: 'Invalid characters' },
-    { regex: /[a-zA-Z]+$/, message: 'Field must contain at least one letter' },
+    { regex: /[a-zA-Z]/, message: 'Field must contain at least one letter' },
     { regex: /^.{3,20}$/, message: 'Field must contain from 3 to 20 characters' },
   ],
   password: [
@@ -12,12 +21,12 @@ export const validationParams = {
     { regex: /[A-Z]/, message: 'Field must contain at least one capital letter' },
     { regex: /[0-9]/, message: 'Field must contain at least one digit' },
   ],
-  old_password: [
+  oldPassword: [
     { regex: /^.{8,40}$/, message: 'Field must contain from 8 to 40 characters' },
     { regex: /[A-Z]/, message: 'Field must contain at least one capital letter' },
     { regex: /[0-9]/, message: 'Field must contain at least one digit' },
   ],
-  new_password: [
+  newPassword: [
     { regex: /^.{8,40}$/, message: 'Field must contain from 8 to 40 characters' },
     { regex: /[A-Z]/, message: 'Field must contain at least one capital letter' },
     { regex: /[0-9]/, message: 'Field must contain at least one digit' },
@@ -41,12 +50,14 @@ export const validationParams = {
     { regex: /^[a-zA-Zа-яёА-ЯЁ0-9-]*$/, message: 'Invalid characters' },
     { regex: /^[A-Z].+$/, message: 'Field must start with capital letter' },
   ],
+  // newChatName: [],
 };
 
 export type InputsCollectionType = keyof typeof validationParams;
 
 type InputFormsConfigType = Array<
-  Omit<InputProps, 'name'> & Pick<InputWithLabelProps, 'label'> & { name: keyof typeof validationParams }
+  Omit<InputProps, 'name'> &
+    Pick<InputWithLabelProps, 'label'> & { name: keyof typeof validationParams; value?: string; disabled?: boolean }
 >;
 
 export const loginInputsConfig: InputFormsConfigType = [
@@ -109,47 +120,109 @@ export const profileInputsConfig: InputFormsConfigType = [
     placeholder: 'Enter your email',
     type: 'text',
     label: 'Email',
+    path: 'user.data.email',
+    disabled: true,
   },
   {
     name: 'login',
     placeholder: 'Enter your login',
     type: 'text',
     label: 'Login',
+    path: 'user.data.login',
+    disabled: true,
   },
   {
     name: 'first_name',
     placeholder: 'Enter your first name',
     type: 'text',
     label: 'First Name',
+    path: 'user.data.first_name',
+    disabled: true,
   },
   {
     name: 'second_name',
     placeholder: 'Enter your last name',
     type: 'text',
     label: 'Second Name',
+    path: 'user.data.second_name',
+    disabled: true,
   },
   {
     name: 'display_name',
     placeholder: 'Enter name to show',
     type: 'text',
     label: 'Name to show',
+    path: 'user.data.display_name',
+    disabled: true,
   },
   {
     name: 'phone',
     placeholder: 'Enter your phone',
     type: 'text',
     label: 'Phone',
+    path: 'user.data.phone',
+    disabled: true,
   },
+];
+
+export const passwordsInputsConfig: InputFormsConfigType = [
   {
-    name: 'old_password',
+    name: 'oldPassword',
     placeholder: 'Enter old password',
-    type: 'text',
-    label: 'Old Password',
+    type: 'password',
+    label: 'OldPassword',
+    path: 'user.data.oldPassword',
   },
   {
-    name: 'new_password',
+    name: 'newPassword',
     placeholder: 'Enter new password',
+    type: 'password',
+    label: 'NewPassword',
+    path: 'user.data.newPassword',
+  },
+];
+
+export const infoInputsConfig: InputFormsConfigType = [
+  {
+    name: 'email',
+    placeholder: 'Enter your email',
     type: 'text',
-    label: 'New Password',
+    label: 'Email',
+    path: 'user.data.email',
+  },
+  {
+    name: 'login',
+    placeholder: 'Enter your login',
+    type: 'text',
+    label: 'Login',
+    path: 'user.data.login',
+  },
+  {
+    name: 'first_name',
+    placeholder: 'Enter your first name',
+    type: 'text',
+    label: 'First Name',
+    path: 'user.data.first_name',
+  },
+  {
+    name: 'second_name',
+    placeholder: 'Enter your last name',
+    type: 'text',
+    label: 'Second Name',
+    path: 'user.data.second_name',
+  },
+  {
+    name: 'display_name',
+    placeholder: 'Enter name to show',
+    type: 'text',
+    label: 'Name to show',
+    path: 'user.data.display_name',
+  },
+  {
+    name: 'phone',
+    placeholder: 'Enter your phone',
+    type: 'text',
+    label: 'Phone',
+    path: 'user.data.phone',
   },
 ];

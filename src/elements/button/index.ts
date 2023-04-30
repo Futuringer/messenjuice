@@ -18,14 +18,14 @@ type CircleButtonProps = {
   type: 'submit' | 'button';
   icon: string;
   events?: {
-    click: () => void;
+    click: (e: Event) => void;
   };
   className?: string;
   disabled?: boolean;
 };
 
 type ButtonProps = DefaultButtonProps | CircleButtonProps;
-class Button extends Block<ButtonProps> {
+class Button extends Block {
   constructor(props: ButtonProps) {
     super(props);
   }

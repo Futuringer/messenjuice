@@ -1,10 +1,10 @@
 const messageTmp = `
-{{#if isMyMessage}}
+{{#if isOwn}}
   <div class="message">
     {{#if image}}
     <img src={{image}} alt="" class="message__image">
     {{/if}}
-    {{text}}
+    {{content}}
     <div class="message__time">{{time}}</div>
   </div>
 {{else}}
@@ -12,7 +12,7 @@ const messageTmp = `
     {{#if image}}
     <img src={{image}} alt="" class="message__image">
     {{/if}}
-    {{text}}
+    {{content}}
     <div class="message__time">{{time}}</div>
   </div>
 {{/if}}

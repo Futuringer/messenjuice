@@ -1,4 +1,4 @@
-export type Handler = (...args: unknown[]) => void;
+export type Handler = (...args: any) => void;
 
 class EventBus {
   listeners: Record<string, Handler[]>;
@@ -12,7 +12,7 @@ class EventBus {
       this.listeners[event] = [];
     }
 
-    this.listeners[event].push(callback);
+    this.listeners[event]?.push(callback);
   }
 
   off(event: string, callback: Handler) {
@@ -25,7 +25,7 @@ class EventBus {
 
   emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      return;
     }
 
     this.listeners[event].forEach(listener => {
@@ -33,5 +33,7 @@ class EventBus {
     });
   }
 }
+
+export const eventBus = new EventBus();
 
 export default EventBus;

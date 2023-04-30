@@ -2,21 +2,39 @@
 
 .userBadge {
   &__container {
+    padding: 5px;
     display: flex;
     align-items: center;
   }
 
   &__avatar {
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
     border-radius: 21px;
     margin-right: 14px;
   }
 
   &__name {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 22px;
     font-weight: 600;
     color: v.$neutralDark;
   }
+
+  &__deleteUser {
+    margin-left: 5px;
+    width: 30px !important;
+    height: 30px !important;
+    background-color: v.$activeError;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  appearance: textfield; /* Firefox */
 }

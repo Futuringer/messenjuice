@@ -1,8 +1,12 @@
 import { InputsCollectionType } from 'src/utils/consts';
 import Block from '../../utils/block';
 import inputTmp from './inputTmp';
+import store, { StoreEvents, withStore } from '../../utils/store';
+import { getFromObj } from '../../utils/helpers';
 
 export type InputProps = {
+  path?: string;
+  value?: string;
   className?: string;
   name: InputsCollectionType;
   type: 'text' | 'number' | 'password' | 'email';
@@ -14,11 +18,18 @@ export type InputProps = {
     invalid?: (value: Event) => void;
     input?: (value: Event) => void;
   };
+  disabled?: boolean;
 };
 
-class Input extends Block<InputProps> {
+class Input extends Block {
   constructor(props: InputProps) {
     super(props);
+
+    store.on(StoreEvents.Updated, () => {
+      if (this?.props?.path?.length > 0) {
+        this.props.value = getFromObj(this.props, this.props.path);
+      }
+    });
   }
 
   render() {
@@ -27,4 +38,7 @@ class Input extends Block<InputProps> {
   }
 }
 
-export default Input;
+const withInput = withStore(state => ({ ...state }));
+
+const InputWithState = withInput(Input);
+export default InputWithState;

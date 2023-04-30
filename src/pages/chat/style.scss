@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
-    width: 340px;
+    width: 440px;
     background-color: v.$baseLight;
   }
 
@@ -23,39 +23,14 @@
     }
   }
 
+  &__settingsButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
   &__submitButton {
     background-color: v.$baseNeutral;
-  }
-}
-
-.optionsButton {
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  border-radius: 17px;
-  width: 34px;
-  height: 34px;
-  margin-bottom: 10px;
-  display: flex;
-  gap: 4px;
-  border: none;
-  outline: none;
-  background-color: transparent;
-
-  &:hover {
-    background-color: v.$baseNeutral;
-  }
-
-  &:active {
-    opacity: 0.5;
-  }
-
-  .optionsButton__dot {
-    border-radius: 3px;
-    min-width: 6px;
-    height: 6px;
-    background-color: v.$neutralDark;
   }
 }
 
@@ -76,7 +51,7 @@
   &__main {
     overflow: hidden;
     display: flex;
-    padding: 80px 10px 70px 65px;
+    padding: 80px 10px 70px 20px;
     height: 100%;
   }
 
@@ -90,6 +65,7 @@
   }
 
   &__messagesList {
+    width: 100%;
     gap: 10px;
     overflow-y: auto;
     display: flex;

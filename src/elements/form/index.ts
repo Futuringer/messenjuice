@@ -8,15 +8,17 @@ type FormProps = {
   formText: string;
   buttons: Button[];
   descriptionText?: string;
-  descriptionLinkText?: string;
-  descriptionLink?: string;
+  descriptionLink?: unknown;
+  errorText?: string;
+  successText?: string;
   singleColumn?: boolean;
   inputs?: InputWithLabel[];
   events?: {
     submit?: (value: HTMLFormElement) => void;
+    click?: (value: HTMLFormElement) => void;
   };
 };
-class Form extends Block<FormProps> {
+class Form extends Block {
   constructor(props: FormProps) {
     super(props);
   }
