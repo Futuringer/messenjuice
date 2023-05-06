@@ -14,6 +14,7 @@ import authController from './controllers/authController';
 import chatsController from './controllers/chatsController';
 import Block from './utils/block';
 import { ROUTES } from './utils/consts';
+import './styles/style.scss';
 
 Handlebars.registerPartial('errorBlock', errorBlockTmp);
 Handlebars.registerPartial('button', buttonTmp);
