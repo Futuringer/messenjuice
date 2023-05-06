@@ -1,13 +1,12 @@
 import Block from '../../utils/block';
 import inputWithLabelTmp from './inputWithLabelTmp';
-import Input from '../input';
 
 export type InputWithLabelProps = {
   label: string;
-  input: Input;
+  input: any;
 };
 
-class InputWithLabel extends Block<InputWithLabelProps> {
+class InputWithLabel extends Block {
   constructor(props: InputWithLabelProps) {
     super(props);
   }

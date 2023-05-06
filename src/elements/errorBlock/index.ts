@@ -8,7 +8,7 @@ type ErrorBlockProps = {
   button: Button;
 };
 
-class ErrorBlock extends Block<ErrorBlockProps> {
+class ErrorBlock extends Block {
   constructor(props: ErrorBlockProps) {
     super(props);
   }

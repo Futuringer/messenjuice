@@ -1,17 +1,16 @@
 import Block from '../../utils/block';
 import messageFormTmp from './messageFormTmp';
 import Button from '../button';
-import Input from '../input';
 
 type MessageFormProps = {
   button: Button;
-  input: Input;
+  input: any;
   events: {
     submit?: (value: HTMLFormElement) => void;
   };
 };
 
-class MessageForm extends Block<MessageFormProps> {
+class MessageForm extends Block {
   constructor(props: MessageFormProps) {
     super(props);
   }

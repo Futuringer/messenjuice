@@ -1,7 +1,7 @@
 import AvatarForm from '../../elements/avatarForm';
 import store, { StoreEvents, withStore } from '../../utils/store';
 import { User } from '../../api/authApi';
-import { validateFormInput, setDefaultLabelState, handleInvalid, handleSubmitForm } from '../../utils/helpers';
+import { validateFormInput, setDefaultLabelState, handleInvalid } from '../../utils/helpers';
 import { profileInputsConfig, passwordsInputsConfig, infoInputsConfig } from '../../utils/consts';
 import InputWithLabel from '../../elements/inputWithLabel';
 import Form from '../../elements/form';

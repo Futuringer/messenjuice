@@ -3,6 +3,8 @@ import WebSocketAPI, { WebSocketConnectPayload, ChatMessagePaload } from '../api
 import { transformGetChatsResponse } from './transformers/webSocketTransformer';
 
 class WebSocketController {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   private api: WebSocketAPI;
 
   constructor() {
