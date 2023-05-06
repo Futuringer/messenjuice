@@ -24,9 +24,6 @@
   },
   "homepage": "https://github.com/Futuringer/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "1.0.9",
-    "@parcel/transformer-inline-string": "2.8.3",
-    "@parcel/transformer-sass": "2.8.3",
     "@typescript-eslint/eslint-plugin": "5.56.0",
     "@typescript-eslint/parser": "5.56.0",
     "editorconfig": "1.0.2",
@@ -36,7 +33,6 @@
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "4.2.1",
-    "parcel": "2.8.3",
     "prettier": "2.8.6",
     "sass": "1.58.3",
     "stylelint": "15.3.0",
