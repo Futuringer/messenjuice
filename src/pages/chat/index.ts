@@ -81,6 +81,7 @@ const messageForm = new MessageForm({
       e.preventDefault();
       const input = document.getElementsByName('message')[0] as HTMLInputElement;
       handleSendMessage(input.value);
+      input.value = '';
     },
   },
 });
