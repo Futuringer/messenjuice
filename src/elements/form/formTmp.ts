@@ -5,6 +5,13 @@ const formTmp = `
   {{#if singleColumn}}
   <div class="form__inputs-container">
       {{{inputs}}}
+      {{#if errorText}}
+        <div class="form__error-text">{{errorText}}</div>
+      {{/if}}
+
+      {{#if successText}}
+        <div class="form__success-text">{{successText}}</div>
+      {{/if}}
   </div>
 
   {{else}}
