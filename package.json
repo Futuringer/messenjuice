@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "---",
   "scripts": {
+    "prepare": "husky install",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js ./src/**/*.test.ts",
     "dev": "webpack serve",
     "build": "webpack --config webpack.config.js",
@@ -67,17 +68,13 @@
     "sass-loader": "13.2.2",
     "style-loader": "3.3.2"
   },
-    "husky": {
-      "hooks": {
-        "pre-commit": "npm run test"
-      }
-    },
-    "lint-staged": {
-      "*.{js,ts}": [
-        "eslint src --fix"
-      ],
-      "*.{css,scss}": [
-        "stylelint \"src/**/*.{css,scss}\""
-      ]
-    }
+
+  "lint-staged": {
+    "*.{ts,js}": [
+      "npm lint"
+    ],
+    "*.{scss,css}": [
+      "npm stylelint"
+    ]
+  }
 }
