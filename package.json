@@ -71,10 +71,10 @@
 
   "lint-staged": {
     "*.{ts,js}": [
-      "npm lint"
+      "npm run lint"
     ],
     "*.{scss,css}": [
-      "npm stylelint"
+      "npm run stylelint"
     ]
   }
 }
