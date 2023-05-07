@@ -48,6 +48,12 @@ npm run dev
 npm run start
 ```
 
+запуск тестов
+
+```sh
+npm run test
+```
+
 # Стек:
 
 - HTML, CSS
@@ -57,6 +63,10 @@ npm run start
 - Handlebars
 - Parcel
 - Typescript
+- Webpack
+- Mocha
+- Chai
+- husky
 
 # Ссылки на ресурсы:
 
