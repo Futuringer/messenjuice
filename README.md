@@ -6,12 +6,7 @@
 
 # Описание проекта:
 
-Третья итерация работы над проектом.
-Добавлена роутинг.
-Внедрен HTTP API чатов, авторизации и пользователей.
-Подключены WebSocket для работы с real-time сообщениями.
-
-Текущий прогресс проекта можно просмотреть по приложенной ссылке netlify.
+Проект представляет из себя онлайн-мессенджер, позволяющий создавать чаты и обмениваться в них сообщениями.
 
 # Доступные страницы:
 
@@ -62,6 +57,7 @@ npm run test
 - Express.js
 - Handlebars
 - Parcel
+- Web sockets
 - Typescript
 - Webpack
 - Mocha
@@ -75,3 +71,4 @@ npm run test
 
 [макет проекта]: https://www.figma.com/file/z5OFT5iabuAW49OTRV1MqC/MY_CHAT_SPRINT_1?node-id=35447-2&t=WxBaDd2pMJJvdNQg-0
 [проект онлайн]: https://messenjuice.netlify.app/sign-in
+[проект на YandecCloud]: http://158.160.57.254/
