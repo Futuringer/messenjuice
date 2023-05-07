@@ -67,7 +67,6 @@ export const handleSubmitForm = (e: HTMLFormElement, formName: string, cb: (valu
       for (const [name, value] of data) {
         dataObject[name] = value;
       }
-      console.log('dataObject', dataObject);
       cb(dataObject);
     }
   }
