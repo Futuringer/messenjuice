@@ -38,6 +38,8 @@
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "mocha": "^10.2.0",
     "mocha-jsdom": "^2.0.0",
     "prettier": "2.8.6",
@@ -64,5 +66,18 @@
     "jsdom": "^22.0.0",
     "sass-loader": "13.2.2",
     "style-loader": "3.3.2"
-  }
+  },
+    "husky": {
+      "hooks": {
+        "pre-commit": "npm run test"
+      }
+    },
+    "lint-staged": {
+      "*.{js,ts}": [
+        "eslint src --fix"
+      ],
+      "*.{css,scss}": [
+        "stylelint \"src/**/*.{css,scss}\""
+      ]
+    }
 }
