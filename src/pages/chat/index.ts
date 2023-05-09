@@ -82,6 +82,9 @@ const messageForm = new MessageForm({
       const input = document.getElementsByName('message')[0] as HTMLInputElement;
       handleSendMessage(input.value);
       input.value = '';
+      messageSubmitButton.setProps({
+        disabled: true,
+      });
     },
   },
 });
