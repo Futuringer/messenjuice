@@ -70,5 +70,5 @@ npm run test
 - [Проект онлайн]
 
 [макет проекта]: https://www.figma.com/file/z5OFT5iabuAW49OTRV1MqC/MY_CHAT_SPRINT_1?node-id=35447-2&t=WxBaDd2pMJJvdNQg-0
-[проект онлайн]: https://messenjuice.netlify.app/sign-in
+[проект онлайн]: https://messenjuice.netlify.app
 [проект на YandecCloud]: http://158.160.57.254/
