@@ -8,6 +8,7 @@ const { window } = new JSDOM('<div id="root"></div>', {
 });
 
 global.window = window;
+global.FormData = window.FormData;
 global.document = window.document;
 global.DocumentFragment = window.DocumentFragment;
 
