@@ -1,5 +1,4 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4d3dc214-d8ca-498d-aa2c-48461432232f/deploy-status)](https://app.netlify.com/sites/messenjuice/deploys)
-![Uploading 7aeaccb2-7833-40e3-9ecd-11c5722de2cb.gif…]()
 
 # Проект Messenjuice
 [Проект онлайн]
@@ -9,6 +8,8 @@
 Обмен сообщениями происходит в чатах, которые создаются пользователем и в которые он может добавить или удалить других пользователей.
 
 <img src="https://github.com/Futuringer/messenjuice/assets/77829629/2859ecda-fdce-41d5-b112-aace843d7ca5" width="100%"/>
+
+<img src="https://github.com/Futuringer/messenjuice/assets/77829629/71c8c567-1ba8-499d-bb5b-0787ddc8952e" width="100%"/>
 
 # Описание проекта:
 
