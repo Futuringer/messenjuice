@@ -52,7 +52,7 @@ npm run test
 
 # Стек:
 
-- HTML, - CSS, - Javascript, - Node.js, - Express.js, - Handlebars, - Parcel, - Web sockets, - Typescript, - Webpack, - Mocha, - Chai, - husky
+HTML, CSS, Javascript, Node.js, Express.js, Handlebars, Parcel, Web sockets, Typescript, Webpack, Mocha, - Chai, husky
 
 # Ссылки на ресурсы:
 
