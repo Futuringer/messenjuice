@@ -7,7 +7,9 @@
 Имеется функционал создания пользователей, редактирования их информации и аватара. 
 Обмен сообщениями происходит в чатах, которые создаются пользователем и в которые он может добавить или удалить других пользователей.
 
-https://github.com/Futuringer/messenjuice/assets/77829629/2859ecda-fdce-41d5-b112-aace843d7ca5
+<img src="https://github.com/Futuringer/messenjuice/assets/77829629/2859ecda-fdce-41d5-b112-aace843d7ca5" width="100%"/>
+
+<img src="https://github.com/Futuringer/messenjuice/assets/77829629/24e461d5-6ba0-4abc-ad47-e079bb620967" width="100%"/>
 
 # Описание проекта:
 
