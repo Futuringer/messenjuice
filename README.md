@@ -1,4 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4d3dc214-d8ca-498d-aa2c-48461432232f/deploy-status)](https://app.netlify.com/sites/messenjuice/deploys)
+![Uploading 7aeaccb2-7833-40e3-9ecd-11c5722de2cb.gif…]()
 
 # Проект Messenjuice
 [Проект онлайн]
