@@ -3,7 +3,7 @@
 # Проект Messenjuice
 [Проект онлайн]
 
-<img src="https://github.com/Futuringer/messenjuice/assets/77829629/2859ecda-fdce-41d5-b112-aace843d7ca5" width="50%"/>
+<img src="https://github.com/Futuringer/messenjuice/assets/77829629/2859ecda-fdce-41d5-b112-aace843d7ca5" width="100%"/>
 
 Учебный проект, представляет из себя онлайн-мессенджер, для обмена сообщениями. 
 Имеется функционал создания пользователей, редактирования их информации и аватара. 
