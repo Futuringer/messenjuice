@@ -54,10 +54,12 @@ npm run test
 
 - HTML, CSS, Javascript, Node.js, Express.js, Handlebars, Parcel, Web sockets, Typescript, Webpack, Mocha, Chai, husky
 
-- # Ссылки на ресурсы:
+# Ссылки на ресурсы:
 
 - [Макет проекта]
 - [Проект онлайн]
 
 [макет проекта]: https://www.figma.com/file/z5OFT5iabuAW49OTRV1MqC/MY_CHAT_SPRINT_1?node-id=35447-2&t=WxBaDd2pMJJvdNQg-0
 [Проект онлайн]: https://messenjuice.netlify.app
+![image](https://github.com/Futuringer/messenjuice/assets/77829629/96f5955f-f1ff-48e1-bd99-ad0ed27a3d09)
+
