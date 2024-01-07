@@ -9,6 +9,10 @@
 
 <img src="https://github.com/Futuringer/messenjuice/assets/77829629/2859ecda-fdce-41d5-b112-aace843d7ca5" width="100%"/>
 
+
+https://github.com/Futuringer/messenjuice/assets/77829629/e910de1d-b810-40bc-8ede-9e151e6ed37a
+
+
 <img src="https://github.com/Futuringer/messenjuice/assets/77829629/24e461d5-6ba0-4abc-ad47-e079bb620967" width="100%"/>
 
 # Описание проекта:
