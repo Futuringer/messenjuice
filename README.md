@@ -7,8 +7,22 @@
 Имеется функционал создания пользователей, редактирования их информации и аватара. 
 Обмен сообщениями происходит в чатах, которые создаются пользователем и в которые он может добавить или удалить других пользователей.
 
-https://github.com/Futuringer/messenjuice/assets/77829629/e910de1d-b810-40bc-8ede-9e151e6ed37a
+https://github.com/Futuringer/messenjuice/assets/77829629/57a851b3-320d-4161-8671-004f91989ee1
+<details>
 
+<summary>Tips for collapsed sections</summary>
+
+### You can add a header
+
+You can add text within a collapsed section. 
+
+You can add an image or a code block, too.
+
+```ruby
+   puts "Hello World"
+```
+
+</details>
 # Описание проекта:
 
 Проект написан на ванильном JavaScript с использованием шаблонизатора Handlebars.
